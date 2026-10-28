@@ -67,3 +67,6 @@ site/examples/hum-0[3-8]/
 site/_tests/_thumbs/hum-02.jpg
 
 site/examples/lumen-0[2-4]/
+
+# runway-gen per-run log (task ids, prompts, credit estimates) — local only
+runway-output/runway-dev-log.jsonl
