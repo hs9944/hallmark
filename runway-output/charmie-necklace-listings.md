@@ -40,3 +40,21 @@ Category: Pre-made charm necklaces
 Material: gold-tone alloy chain, enamel and gold-tone charms
 Closure: lobster clasp with extender
 Price: to be set by Harsh
+
+# Added 2026-11-16: four sets from the repeatable charms photo (same chain, same pink-and-mint style)
+
+## 5. Pink Love
+Charms, left to right: pink Love heart, pink bow, pink daisy, pink lollipop, pink Love heart.
+- Main image: 2026-11-16-necklace-pink-love-pinkmint-v1.png
+
+## 6. Blue Dream
+Charms, left to right: unicorn, gold dolphin, half-blue heart, girl in blue dress, blue butterfly.
+- Main image: 2026-11-16-necklace-blue-dream-pinkmint-v1.png
+
+## 7. Sweet Day
+Charms, left to right: umbrella, smiling cloud, sunflower, cupcake, white Star of David.
+- Main image: 2026-11-16-necklace-sweet-day-pinkmint-v1.png
+
+## 8. Pearl White
+Charms, left to right: white star, crescent moon, swan, cherry blossom, heart key.
+- Main image: 2026-11-16-necklace-pearl-white-pinkmint-v1.png
