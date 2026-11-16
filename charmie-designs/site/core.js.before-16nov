@@ -1,0 +1,346 @@
+/* Charmiè shop core: catalogue, prices, photos, the shared bag, live stock and the bag drawer.
+   Used by the home page (and its design options). studio.html and checkout.js share the same
+   localStorage bag ('charmie-cart') and item shapes:
+     ready-made design  {type:'design', id:'design-7', name, kind:'bracelet'|'anklet'|'necklace', price, img}
+     keychain           {type:'design', id:'keychain-pup-love', name, kind:'keychain', price, img, qty}
+     custom piece       {type:'custom', piece, chain, charms:[ids], names:[charm names], price}
+   Prices are the same as the Hostinger store's; edit PRICING here and in studio.html together. */
+(function(){
+  'use strict';
+
+  /* site root, worked out from this script's own URL so pages in sub-folders still find the photos */
+  const ROOT = (document.currentScript && document.currentScript.src || location.href).replace(/js\/core\.js(\?.*)?$/, '');
+
+  /* PRICING: keep identical to studio.html. All values in ₹. */
+  const PRICING = {
+    ready:{ bracelet:599, anklet:699, necklace:799 },
+    keychainFrom:299,   /* the cheapest keychain; each keychain carries its own price below (28 Oct 2026) */
+    custom:{ bracelet:650, anklet:750, necklace:850, waist:1199 },
+    includedCharms:5,
+    extraCharm:100,
+    maxCharms:12
+  };
+  /* first-order offer (28 Oct 2026): the welcome pop-up collects a name and email, then shows this code.
+     The same code must exist in the store (hPanel → Store → Discounts). signupUrl is the Google Apps Script
+     web-app URL that appends sign-ups to Harsh's sheet (Claude OS/20-charmie/signups/README.md); empty = the
+     pop-up still works, nothing is sent anywhere. */
+  const PROMO = { code:'WELCOME10', percent:10, signupUrl:'' };
+  /* flat ₹79 on every order, as the store charges (Harsh, 21 Oct). Set freeOver to a number
+     only after the store has the same free-shipping rule. */
+  const SHIPPING = { fee:79, freeOver:null };
+  /* flip to true once Razorpay shows at checkout (hPanel → Store → Payments) */
+  const ONLINE_PAYMENTS = false;
+  /* fill these in to show the Instagram band, contact links and WhatsApp help; empty = hidden */
+  const CONTACT = { instagram:'', whatsapp:'', email:'' };
+
+  /* charms: what hangs on it, left to right in the photo. story: the line on its product page (product.html?d=id). */
+  const PRODUCTS = [
+    {id:22,name:'Noir Chic',type:'necklace',charms:'a heart key, a squirrel, a wide-eyed cat, a perfume bottle and a high heel',story:'A little black dress in necklace form. Five black enamel charms with gold trim on a ribbed gold-tone curb chain, for the girl who loves a bit of Parisian attitude.'},
+    {id:23,name:'Mystic Night',type:'necklace',charms:'a black star, a crescent moon with a star, a black cat, a peace sign and a seahorse',story:'Moonlit and a little magical. A black enamel star, a crescent moon, a sleek black cat, a gold peace sign and a seahorse on a ribbed gold-tone curb chain. For night owls, dreamers and lucky souls.'},
+    {id:24,name:'Lucky Garden',type:'necklace',charms:'a four-leaf clover, a daisy, an owl on a branch, a star and a tree of life',story:'Pure gold-tone good luck. A four-leaf clover, a daisy, a wise owl on its branch, a star and a tree of life on a ribbed curb chain. Earthy, warm and easy to wear every day.'},
+    {id:25,name:'Wonderland',type:'necklace',charms:'a white rabbit in a waistcoat, Saturn, a whale tail, a pink heart and a card soldier',story:'Down the rabbit hole. A dapper white rabbit, a pastel Saturn, a whale tail, a blush heart and a playing-card soldier on a ribbed gold-tone curb chain. Sweet, surreal and made for storytellers.'}
+  ];
+  /* the order the home page shows first (best sellers) */
+  const FEATURED = [22,23,25,24];
+  /* 28 Oct 2026: new names and a price for each keychain (Harsh). Slugs stay: they are the photo file
+     names and the store SKUs (K-<slug>). desc: the line on its product page (product.html?k=slug). */
+  const KEYCHAINS = [
+    {slug:'pup-love',name:'Pawfect Pal',price:299,charms:2,alt:'Gold keychain with a black paw-print charm and a white puppy charm',what:'a black paw print and a white puppy',desc:'For dog people. A little white pup and the paw print it left behind.'},
+    {slug:'wizard-crest',name:'Hogwarts Express',price:499,charms:4,alt:'Gold keychain with three cartoon wizard student charms and a four-house crest charm',what:'Harry, Ron, Hermione and the Hogwarts crest',desc:'The golden trio and the school crest, ready for platform nine and three-quarters.'},
+    {slug:'our-common-home',name:'Travel Princess',price:449,charms:3,alt:'Gold keychain with a blue aeroplane, a pink suitcase and a globe charm',what:'a blue aeroplane, a pink suitcase and an Our Common Home globe',desc:'To travel is to live. A plane, a pink suitcase and the whole world on a coin.'},
+    {slug:'boarding-pass',name:'Meet me at destination',price:399,charms:3,alt:'Gold keychain with a boarding pass, a folded vacation map and an orange travel suitcase charm',what:'a boarding pass, a vacation map and a sticker-covered suitcase',desc:'Boarding pass, map and a suitcase covered in stickers. Wherever you are going, this is coming too.'},
+    {slug:'tokyo-dreams',name:'Tokyo Dreaming',price:449,charms:3,alt:'Gold keychain with a camera, a pink suitcase and a round Tokyo skyline charm',what:'a retro camera, a pink suitcase and a Tokyo coin',desc:'Cherry blossom, Tokyo Tower and a camera to catch it all. For the trip you keep planning.'},
+    {slug:'glam-girl',name:'Diva 💅🏻',price:499,charms:6,alt:'Gold keychain with heart sunglasses, a red heel, lipstick, an eyeshadow palette, perfume and a white handbag charm',what:'heart sunglasses, a red heel, a lipstick, an eyeshadow palette, perfume and a handbag',desc:'Six charms and zero apologies. Heart sunglasses, a red heel, lipstick, palette, perfume and a little handbag.'},
+    {slug:'pika-pal',name:'Pika Pika Pokémon',price:359,charms:2,alt:'Gold keychain with a red and white ball charm and a yellow electric mouse charm',what:'a Poké Ball and Pikachu',desc:'Pikachu and his Poké Ball, clipped to your keys. Gotta catch this one.'},
+    {slug:'coffee-run',name:'Starbucks Lover',price:359,charms:2,alt:'Gold keychain with an iced coffee cup charm and a round green coffee medallion',what:'an iced coffee and the green siren coin',desc:'An iced coffee and the green siren. For whoever is always the one who says "coffee first".'},
+    {slug:'super-saiyan',name:'Dragon Ball Z',price:359,charms:2,alt:'Gold keychain with an orange star ball and dragon charm and a spiky-haired fighter charm',what:'a four-star dragon ball with Shenron and Super Saiyan Goku',desc:'Super Saiyan Goku and a dragon ball with Shenron curled round it. Power level: yes.'},
+    {slug:'powerpuff',name:'Powerpuff Girls',price:399,charms:3,alt:'Gold keychain with three big-eyed superhero girl charms in red, green and blue',what:'Blossom, Bubbles and Buttercup',desc:'Sugar, spice and everything nice. Blossom, Bubbles and Buttercup on one gold ring.'}
+  ];
+  PRICING.keychainFrom = Math.min.apply(null, KEYCHAINS.map(k => k.price));
+  const keyBySlug = slug => KEYCHAINS.find(k => k.slug === slug);
+  /* 28 Oct 2026: the limited waist chain drop. Each look opens the Studio with the piece, chain and charms
+     already placed (studio.html#p=waist&c=<chain>&i=<ids>), so she can change anything before ordering.
+     Mock-ups: assets/waist/<slug>.webp, rendered from the Studio stage. Charm ids are the Studio's (CH-###). */
+  const WAIST_DROP = [
+    {slug:'golden-hour',name:'Golden hour',chain:'g1',charms:['CH-223','CH-229','CH-222','CH-208','CH-212'],names:'hot air balloon, coconut drink, pastel rainbow, a plane and a globe',line:'Sunsets and somewhere far away.'},
+    {slug:'guardian',name:'Guardian',chain:'g2',charms:['CH-182','CH-231','CH-181','CH-231','CH-182'],names:'rhinestone evil eyes, evil eye halos and a hamsa',line:'Evil eyes and a hamsa, kept close.'},
+    {slug:'fruit-punch',name:'Fruit punch',chain:'g1',charms:['CH-131','CH-130','CH-121','CH-120','CH-125'],names:'cherries, watermelon, strawberry, orange slice and a pineapple',line:'Glossy red fruit, poolside.'},
+    {slug:'sugar-rush',name:'Sugar rush',chain:'g3',charms:['CH-241','CH-138','CH-232','CH-128','CH-240'],names:'bubble teas, a princess cupcake, a honey pot and cake',line:'Bubble tea, cake and a cupcake with a crown.'}
+  ];
+  const KIND = {bracelet:'Bracelet', anklet:'Anklet', necklace:'Necklace', keychain:'Keychain'};
+  const PLURAL = {bracelet:'Bracelets', anklet:'Anklets', necklace:'Necklaces'};
+  const CUSTOM_NAME = {bracelet:'bracelet', anklet:'anklet', necklace:'necklace', waist:'waist chain'};
+  const CHAIN_NAME = {g1:'Textured curb', g2:'Double-link', g3:'Fine curb'};
+  const PIECE_CODE = {bracelet:'BR', anklet:'AN', necklace:'NE'};
+  const QTY_MAX = 10;
+
+  PRODUCTS.forEach(p => {
+    p.price = PRICING.ready[p.type];
+    p.alt = p.charms ? `${p.name} ${p.type} with ${p.charms}` : `${p.name} ${p.type} with five enamel charms on a gold-tone chain`;
+  });
+  /* product pages (28 Oct 2026): one template, product.html, driven by this data */
+  const productUrl = (kind, id) => ROOT + 'product.html?' + (kind === 'keychain' ? 'k=' + encodeURIComponent(id) : 'd=' + id);
+  const waistUrl = w => ROOT + 'studio.html#p=waist&c=' + w.chain + '&i=' + w.charms.join(',');
+  const waistImg = slug => ROOT + 'assets/waist/' + slug + '.webp';
+
+  /* ---------- photos ---------- */
+  const pad = n => String(n).padStart(2, '0');
+  /* size: 'sq' 800px square · 'sm' 400px square · 'wide' 960×720 */
+  function designImg(id, size){
+    const s = size === 'sm' ? '-400' : size === 'wide' ? '-wide' : '';
+    return ROOT + 'assets/designs/d' + pad(id) + s + '.webp';
+  }
+  const keyImg = (slug, small) => ROOT + 'assets/keychains/' + slug + (small ? '-300' : '') + '.webp';
+  const photo = name => ROOT + 'assets/photos/' + name;
+  /* bag items carry the old image path ('../assets/products/7.webp'); map it to the new files */
+  function itemImg(it){
+    if (!it || typeof it.img !== 'string') return '';
+    let m = it.img.match(/products\/(\d+)\.webp/); if (m) return designImg(+m[1], 'sm');
+    m = it.img.match(/keychains\/([\w-]+)\.jpg/); return m ? keyImg(m[1], true) : '';
+  }
+
+  /* ---------- helpers ---------- */
+  const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+  const esc = s => String(s).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+  const plural = (k, w) => k + ' ' + w + (k === 1 ? '' : 's');
+  const byId = id => PRODUCTS.find(p => p.id === +id);
+  const designId = id => 'design-' + id;
+  const keyId = slug => 'keychain-' + slug;
+
+  /* ---------- bag ---------- */
+  const KEY = 'charmie-cart';
+  const isKey = i => i.type === 'design' && typeof i.id === 'string' && i.id.indexOf('keychain-') === 0;
+  const qtyOf = i => isKey(i) ? (i.qty || 1) : 1;
+  const lineKey = i => i.id + '|' + i.kind;
+  function validItem(i){
+    if (!i || typeof i !== 'object' || typeof i.price !== 'number') return false;
+    /* designs 1 to 21 were retired on 6 Nov 2026: a saved bag line for a design that is no longer in PRODUCTS drops out */
+    if (i.type === 'design') return typeof i.id === 'string' && typeof i.name === 'string' && Object.hasOwn(KIND, i.kind)
+      && (i.id.indexOf('design-') !== 0 || !!byId(i.id.slice(7)));
+    return (i.type === undefined || i.type === 'custom') && Object.hasOwn(CUSTOM_NAME, i.piece) && Object.hasOwn(CHAIN_NAME, i.chain) && Array.isArray(i.charms);
+  }
+  /* clamps keychain qty and merges duplicate keychain lines */
+  function merge(list){
+    const out = [], seen = Object.create(null);
+    let changed = false;
+    list.forEach(i => {
+      if (!isKey(i)){ if ('qty' in i){ delete i.qty; changed = true; } out.push(i); return; }
+      const q = Math.min(QTY_MAX, Math.max(1, Math.floor(Number(i.qty)) || 1));
+      const prev = seen[lineKey(i)];
+      if (prev){ prev.qty = Math.min(QTY_MAX, prev.qty + q); changed = true; return; }
+      if (i.qty !== q){ i.qty = q; changed = true; }
+      seen[lineKey(i)] = i; out.push(i);
+    });
+    return {list:out, changed};
+  }
+  /* keychain lines saved before 28 Oct 2026 carry the old name and ₹499; bring them up to date */
+  function refreshKeys(list){
+    let changed = false;
+    list.forEach(i => {
+      if (!isKey(i)) return;
+      const k = keyBySlug(i.id.slice(9)); if (!k) return;
+      if (i.price !== k.price){ i.price = k.price; changed = true; }
+      if (i.name !== k.name){ i.name = k.name; changed = true; }
+    });
+    return changed;
+  }
+  function load(){
+    let c;
+    try { c = JSON.parse(localStorage.getItem(KEY)); } catch(e){ return []; }
+    if (!Array.isArray(c)) return [];
+    const m = merge(c.filter(validItem));
+    if (refreshKeys(m.list) || m.changed) write(m.list);
+    return m.list;
+  }
+  function write(list){ try { localStorage.setItem(KEY, JSON.stringify(list)); } catch(e){} }
+
+  const listeners = [];
+  function changed(){ const list = load(); listeners.forEach(fn => { try { fn(list); } catch(e){} }); }
+  window.addEventListener('storage', e => { if (e.key === KEY) changed(); });
+
+  const cart = {
+    items: load,
+    count: (list = load()) => list.reduce((s, i) => s + qtyOf(i), 0),
+    total: (list = load()) => list.reduce((s, i) => s + i.price * qtyOf(i), 0),
+    hasDesign: id => load().some(i => i.type === 'design' && i.id === designId(id)),
+    designKind(id){ const it = load().find(i => i.type === 'design' && i.id === designId(id)); return it ? it.kind : null; },
+    keyQty: slug => load().filter(i => isKey(i) && i.id === keyId(slug)).reduce((s, i) => s + qtyOf(i), 0),
+    /* returns {ok, msg}; one of one, so a design can be in the bag only once */
+    addDesign(id, kind){
+      const p = byId(id); if (!p) return {ok:false, msg:'That design isn’t available.'};
+      kind = Object.hasOwn(PRICING.ready, kind) ? kind : p.type;
+      if (stock.isSold(id, kind)) return {ok:false, msg:`${p.name} ${KIND[kind].toLowerCase()} has sold.`};
+      const list = load();
+      if (list.some(i => i.type === 'design' && i.id === designId(id))) return {ok:false, msg:`${p.name} is already in your bag. Each design is one of one.`};
+      list.push({type:'design', id:designId(id), name:p.name, kind, price:PRICING.ready[kind], img:`../assets/products/${id}.webp`});
+      write(list); changed();
+      return {ok:true, msg:`${p.name} ${KIND[kind].toLowerCase()} added to your bag`};
+    },
+    addKeychain(slug){
+      const k = KEYCHAINS.find(x => x.slug === slug); if (!k) return {ok:false, msg:''};
+      const list = load(), have = list.find(i => isKey(i) && i.id === keyId(slug));
+      if (have && have.qty >= QTY_MAX) return {ok:false, msg:`You can add up to ${QTY_MAX} of each keychain.`};
+      if (have) have.qty += 1;
+      else list.push({type:'design', id:keyId(slug), name:k.name, kind:'keychain', price:k.price, img:`../assets/keychains/${slug}.jpg`, qty:1});
+      write(list); changed();
+      const n = have ? have.qty : 1;
+      return {ok:true, msg: n > 1 ? `${k.name} keychain added (${n} in bag)` : `${k.name} keychain added to your bag`};
+    },
+    /* +1 / −1 on a keychain; going below 1 removes it */
+    stepKeychain(slug, d){
+      const list = load(), at = list.findIndex(i => isKey(i) && i.id === keyId(slug)), it = list[at];
+      if (!it) return {ok:false, msg:''};
+      if (d > 0 && it.qty >= QTY_MAX) return {ok:false, msg:`You can add up to ${QTY_MAX} of each keychain.`};
+      const gone = d < 0 && it.qty <= 1;
+      if (gone) list.splice(at, 1); else it.qty += d;
+      write(list); changed();
+      return {ok:true, msg: gone ? `${it.name} removed from your bag` : `${it.name} quantity ${it.qty}`};
+    },
+    removeAt(idx){
+      const list = load(), gone = list.splice(idx, 1)[0];
+      write(list); changed();
+      return gone;
+    },
+    onChange(fn){ listeners.push(fn); }
+  };
+  const itemTitle = it => it.type === 'design' ? it.name : 'Custom ' + CUSTOM_NAME[it.piece];
+
+  /* ---------- live stock from the Hostinger store (public, no key) ---------- */
+  const API = 'https://api-ecommerce.hostinger.com/v2', CHANNEL = 'scha_01M4XH3NWW564PE2S0ZKRZ418H';
+  const stock = {
+    sold: new Set(), ready: false, listeners: [],
+    isSold(id, kind){ return this.sold.has('D' + pad(id) + '-' + PIECE_CODE[kind]); },
+    /* true when every piece of a design has sold */
+    allSold(id){ return Object.keys(PIECE_CODE).every(k => this.isSold(id, k)); },
+    onChange(fn){ this.listeners.push(fn); if (this.ready) fn(); },
+    async refresh(){
+      try {
+        const r = await fetch(API + '/channels/' + CHANNEL + '/products?limit=100');
+        if (!r.ok) return;
+        const d = await r.json(), sold = new Set();
+        (d.data || []).forEach(p => (p.variants || []).forEach(v => { if (v.sku && v.is_available === false) sold.add(v.sku); }));
+        this.sold = sold; this.ready = true;
+        this.listeners.forEach(fn => { try { fn(); } catch(e){} });
+      } catch(e){ /* offline: show everything, checkout still checks */ }
+    }
+  };
+
+  /* ---------- announcements (screen readers + optional toast) ---------- */
+  let live, toastEl, liveT, toastT;
+  function ensureLive(){
+    if (live) return;
+    live = document.createElement('div'); live.className = 'vh'; live.setAttribute('role', 'status'); live.setAttribute('aria-live', 'polite'); live.setAttribute('aria-atomic', 'true');
+    toastEl = document.createElement('div'); toastEl.className = 'toast'; toastEl.setAttribute('aria-hidden', 'true');
+    document.body.append(live, toastEl);
+  }
+  function say(text, visible){
+    ensureLive();
+    live.textContent = ''; clearTimeout(liveT);
+    liveT = setTimeout(() => { live.textContent = text; }, 30);
+    if (visible && text){
+      toastEl.textContent = text; toastEl.classList.add('on');
+      clearTimeout(toastT); toastT = setTimeout(() => toastEl.classList.remove('on'), 5000);
+    }
+  }
+
+  /* ---------- bag drawer (checkout.js adds the Checkout button into #bagPanel) ---------- */
+  const bag = {
+    panel:null, scrim:null, list:null, openers:[], opener:null,
+    mount(opts){
+      opts = opts || {};
+      const scrim = document.createElement('div'); scrim.className = 'scrim'; scrim.id = 'bagScrim'; scrim.hidden = true;
+      const panel = document.createElement('div');
+      panel.className = 'bagpanel'; panel.id = 'bagPanel'; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true');
+      panel.setAttribute('aria-labelledby', 'bagTitle'); panel.tabIndex = -1; panel.hidden = true;
+      panel.innerHTML = '<div class="bp-top"><h2 id="bagTitle">Your bag</h2><button class="btn alt sm" type="button" data-bag-close>' + esc(opts.closeLabel || 'Keep shopping') + '</button></div>'
+        + '<ul class="bp-list" id="bagList"></ul>'
+        + '<p class="bp-ship" id="bagShip"></p>'
+        + '<div class="bp-total"><span>Total</span><span id="bagTotal">₹0</span></div>'
+        + '<p class="fine">Your bag is saved on this device.</p>';
+      document.body.append(scrim, panel);
+      this.panel = panel; this.scrim = scrim; this.list = panel.querySelector('#bagList');
+      panel.querySelector('[data-bag-close]').addEventListener('click', () => this.close(true));
+      scrim.addEventListener('click', () => this.close(true));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) this.close(true); });
+      this.list.addEventListener('click', e => this.onListClick(e));
+      document.querySelectorAll(opts.openers || '[data-bag-open]').forEach(b => this.addOpener(b));
+      cart.onChange(() => this.render());
+      this.render();
+    },
+    addOpener(b){
+      this.openers.push(b);
+      b.setAttribute('aria-expanded', 'false'); b.setAttribute('aria-controls', 'bagPanel');
+      b.addEventListener('click', () => { if (this.panel.hidden) this.open(b); else this.close(true); });
+    },
+    open(opener){
+      this.opener = opener || document.activeElement;
+      this.panel.hidden = false; this.scrim.hidden = false;
+      this.openers.forEach(b => b.setAttribute('aria-expanded', 'true'));
+      document.documentElement.classList.add('bag-open');
+      this.panel.focus();
+    },
+    close(focus){
+      this.panel.hidden = true; this.scrim.hidden = true;
+      this.openers.forEach(b => b.setAttribute('aria-expanded', 'false'));
+      document.documentElement.classList.remove('bag-open');
+      if (focus && this.opener && document.body.contains(this.opener) && this.opener.getClientRects().length) this.opener.focus();
+    },
+    render(){
+      const list = load(), n = cart.count(list), total = cart.total(list);
+      document.querySelectorAll('[data-bag-count]').forEach(el => { el.textContent = n; });
+      this.openers.forEach(b => b.setAttribute('aria-label', 'Bag, ' + plural(n, 'item')));
+      if (!this.panel) return;
+      this.panel.querySelector('#bagTotal').textContent = inr(total);
+      const ship = this.panel.querySelector('#bagShip');
+      ship.textContent = !n ? '' : !SHIPPING.freeOver ? `Shipping ${inr(SHIPPING.fee)}, added at checkout.`
+        : total >= SHIPPING.freeOver ? 'Free shipping on this order.' : `Add ${inr(SHIPPING.freeOver - total)} more for free shipping (otherwise ${inr(SHIPPING.fee)}).`;
+      this.list.innerHTML = list.length ? list.map((it, idx) => {
+        const t = itemTitle(it), src = itemImg(it);
+        const thumb = src ? `<img src="${src}" width="48" height="48" alt="" decoding="async">` : '<span class="bth" aria-hidden="true">✦</span>';
+        if (isKey(it)){
+          const q = qtyOf(it), slug = it.id.slice(9);
+          return `<li class="kq"><span class="bi">${thumb}<span>${esc(t)}<small>Keychain · ${inr(it.price)} each</small></span></span>`
+            + `<span class="bctl"><span class="qs" role="group" aria-label="Quantity of ${esc(t)}">`
+            + `<button type="button" class="qb" data-step="-1" data-slug="${esc(slug)}" aria-label="Decrease quantity of ${esc(t)}">−</button>`
+            + `<span class="qn">${q}</span>`
+            + `<button type="button" class="qb" data-step="1" data-slug="${esc(slug)}" aria-label="Increase quantity of ${esc(t)}"${q >= QTY_MAX ? ' aria-disabled="true"' : ''}>+</button></span>`
+            + `<span class="lp">${inr(it.price * q)}</span></span></li>`;
+        }
+        let sub;
+        if (it.type === 'design') sub = KIND[it.kind] + ' · One of one · ' + inr(it.price);
+        else sub = CHAIN_NAME[it.chain] + ' chain · ' + plural(it.charms.length, 'charm') + ' · ' + inr(it.price)
+          + (Array.isArray(it.names) && it.names.length ? '<br>' + esc(it.names.join(', ')) : '');
+        return `<li><span class="bi">${thumb}<span>${esc(t)}<small>${sub}</small></span></span>`
+          + `<button type="button" class="link-btn" data-remove="${idx}" aria-label="Remove ${esc(t)} from bag">Remove</button></li>`;
+      }).join('') : '<li class="empty">Your bag is empty.</li>';
+    },
+    onListClick(e){
+      const s = e.target.closest('[data-step]');
+      if (s){
+        if (s.getAttribute('aria-disabled') === 'true') return;
+        const r = cart.stepKeychain(s.dataset.slug, +s.dataset.step); if (r.msg) say(r.msg);
+        const again = this.list.querySelector(`[data-slug="${s.dataset.slug}"][data-step="${s.dataset.step}"]`);
+        (again || this.panel).focus(); return;
+      }
+      const b = e.target.closest('[data-remove]'); if (!b) return;
+      const idx = +b.dataset.remove, gone = cart.removeAt(idx);
+      say((gone ? itemTitle(gone) : 'Item') + ' removed. ' + plural(cart.count(), 'item') + ' in bag.');
+      const rest = this.list.querySelectorAll('[data-remove]');
+      (rest[Math.min(idx, rest.length - 1)] || this.panel).focus();
+    }
+  };
+
+  /* thank-you / cancelled note after the hosted checkout sends the customer back */
+  (function clearOnSuccess(){ try { if (/[?&]order=done(&|$)/.test(location.search)) localStorage.removeItem(KEY); } catch(e){} })();
+
+  window.Charmie = {
+    ROOT, PRICING, PROMO, SHIPPING, ONLINE_PAYMENTS, CONTACT, PRODUCTS, FEATURED, KEYCHAINS, WAIST_DROP,
+    KIND, PLURAL, CHAIN_NAME, CUSTOM_NAME,
+    designImg, keyImg, photo, productUrl, waistUrl, waistImg, inr, esc, plural, byId, keyBySlug,
+    cart, stock, bag, say,
+    studioUrl: (hash) => ROOT + 'studio.html' + (hash ? '#' + hash : ''),
+    paymentNote: () => ONLINE_PAYMENTS ? 'UPI, cards or cash on delivery.' : 'Cash on delivery.',
+    shippingNote: () => SHIPPING.freeOver ? `Free shipping over ${inr(SHIPPING.freeOver)}, otherwise ${inr(SHIPPING.fee)}.` : `Shipping ${inr(SHIPPING.fee)} on every order.`
+  };
+  stock.refresh();
+})();
