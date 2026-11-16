@@ -79,13 +79,13 @@ Charms, left to right: medallion cross, moon with heart, tree-of-life heart, ham
 
 13. Gold Wings: small butterfly, butterfly, owl, filigree butterfly, dragonfly. All gold. — 2026-11-16-necklace-gold-wings-pinkmint-v1.png
 14. Purple Orchard: purple whale tail, purple planet, navy flower pendant, grapes, purple whale tail. — 2026-11-16-necklace-purple-orchard-pinkmint-v1.png
-15. Nautical Red: red lips, hamsa, ship's wheel, anchor, red binoculars. — 2026-11-16-necklace-nautical-red-pinkmint-v1.png
+15. Nautical Red: red lips, hamsa, ship's wheel, anchor, red binoculars. — 2026-11-16-necklace-nautical-red-pinkmint-v2.png
 16. Paris White: gold trumpet, white cross, blue treble clef, white rabbit, gold whale tail. — 2026-11-16-necklace-paris-white-pinkmint-v2.png
-17. Seashore: blue starfish, pearl shell, blue butterfly, conch, blue starfish. — 2026-11-16-necklace-seashore-pinkmint-v1.png
-18. Blue Angel: saint medallion, blue whale, half-blue heart, blue flower, cherub. — 2026-11-16-necklace-blue-angel-pinkmint-v1.png
-19. Midnight Tide: navy moon, navy planet, gold tree, teal whale tail, blue starfish. — 2026-11-16-necklace-midnight-tide-pinkmint-v1.png
+17. Seashore: blue starfish, pearl shell, blue butterfly, conch, blue starfish. — 2026-11-16-necklace-seashore-pinkmint-v2.png
+18. Blue Angel: saint medallion, blue whale, half-blue heart, blue flower, cherub. — 2026-11-16-necklace-blue-angel-pinkmint-v2.png
+19. Midnight Tide: navy moon, navy planet, gold tree, teal whale tail, blue starfish. — 2026-11-16-necklace-midnight-tide-pinkmint-v2.png
 20. Pink Paris: swallow, pink bow, filigree heart, pink perfume, gold cross. — 2026-11-16-necklace-pink-paris-pinkmint-v1.png
-21. Tropical: turtle, purple whale tail, pink starfish, cowrie shell, flamingo. — 2026-11-16-necklace-tropical-pinkmint-v1.png
+21. Tropical: turtle, purple whale tail, pink starfish, cowrie shell, flamingo. — 2026-11-16-necklace-tropical-pinkmint-v2.png
 22. Wanderlust: medallion cross, Eiffel tower, red Love heart, airplane, LOVE letters. — 2026-11-16-necklace-wanderlust-pinkmint-v2.png
 23. Daisy Field: lilac daisy, gold leaf, yellow daisy, tree of life, lilac daisy. — 2026-11-16-necklace-daisy-field-pinkmint-v1.png
 24. Starlight: coral star, moon with heart, yellow daisy, hamsa, coral star. — 2026-11-16-necklace-starlight-pinkmint-v1.png
@@ -95,4 +95,4 @@ Charms, left to right: medallion cross, moon with heart, tree-of-life heart, ham
 28. Cherry Kiss: rose, red butterfly, cherries, red heart, red lips. — 2026-11-16-necklace-cherry-kiss-pinkmint-v1.png
 29. Summer Red: watermelon half, rose, cactus, strawberry, cherries. — 2026-11-16-necklace-summer-red-pinkmint-v1.png
 30. Fairytale: polka-dot bow, red heart, castle, red diamond, white rabbit in red coat. — 2026-11-16-necklace-fairytale-pinkmint-v1.png
-31. Red Wine: wine glass, red starfish, Love heart outline, strawberry, wine glass. — 2026-11-16-necklace-red-wine-pinkmint-v1.png
+31. Red Wine: wine glass, red starfish, Love heart outline, strawberry, wine glass. — 2026-11-16-necklace-red-wine-pinkmint-v2.png
