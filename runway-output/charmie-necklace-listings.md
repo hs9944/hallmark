@@ -58,3 +58,19 @@ Charms, left to right: umbrella, smiling cloud, sunflower, cupcake, white Star o
 ## 8. Pearl White
 Charms, left to right: white star, crescent moon, swan, cherry blossom, heart key.
 - Main image: 2026-11-16-necklace-pearl-white-pinkmint-v1.png
+
+## 9. Ocean Blue
+Charms, left to right: gold whale tail, blue starfish, blue butterfly, dark blue planet, blue treble clef.
+- Main image: 2026-11-16-necklace-ocean-blue-pinkmint-v1.png
+
+## 10. Red Hot
+Charms, left to right: red wine glass, red binoculars, ship's wheel, red lips, red Love heart.
+- Main image: 2026-11-16-necklace-red-hot-pinkmint-v1.png
+
+## 11. Tutti Frutti
+Charms, left to right: watermelon, palm tree, strawberry, cherries, apple. (Photo rows 3 and 4 are the same set.)
+- Main image: 2026-11-16-necklace-tutti-frutti-pinkmint-v1.png
+
+## 12. Gold Faith
+Charms, left to right: medallion cross, moon with heart, tree-of-life heart, hamsa, plain cross. All gold.
+- Main image: 2026-11-16-necklace-gold-faith-pinkmint-v1.png
