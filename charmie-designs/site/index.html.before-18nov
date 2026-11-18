@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Charmiè · Tiny charms. Your story.</title>
+<meta name="description" content="One-of-one charm bracelets, anklets and necklaces, made by hand. A limited waist chain drop, keychains from ₹299, and a Charm Studio to build your own from ₹650.">
+<meta name="theme-color" content="#FBE8EF">
+<link rel="canonical" href="https://shopcharmie.in/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Charmiè">
+<meta property="og:title" content="Charmiè · Tiny charms. Your story.">
+<meta property="og:description" content="Charm bracelets, anklets and necklaces made by hand. One-of-one designs, or build your own with 5 charms included.">
+<meta property="og:url" content="https://shopcharmie.in/">
+<meta property="og:image" content="https://shopcharmie.in/assets/photos/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23F7D6E2'/%3E%3Cpath d='M32 8L37 27L56 32L37 37L32 56L27 37L8 32L27 27Z' fill='%23E8C46A' stroke='%23171717' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/bag.css?v=20261106">
+<link rel="stylesheet" href="css/welcome.css?v=20261106">
+<style>
+/* ===== Charmiè home (21 Oct 2026): hero, Studio band and care from option B ("Story feed"),
+   the one-of-one grid and keychains from option A ("Sticker shop"). Tokens first. ===== */
+:root{
+  --ink:#171717;--white:#fff;--pink:#F7D6E2;--pink-soft:#FBE8EF;--mint:#D8F1E7;--mint-soft:#EAF7F1;
+  --surface:#F4F2F1;--muted:#5E5E5E;--gold:#E8C46A;--neck:#F6F6F6;
+  --font-head:'Fraunces',Georgia,serif;--font-body:'Manrope',system-ui,sans-serif;--font-brand:'Cormorant Garamond',Georgia,serif;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:72px;
+  --r-sm:12px;--r-md:16px;--r-lg:24px;--r-pill:999px;
+  --shadow-soft:0 10px 30px -18px rgba(0,0,0,.3);--shadow-hard:3px 3px 0 #171717;
+  --col:935px;            /* the width of an Instagram profile column */
+  --hdr-h:0px;            /* sticky header height (desktop only) */
+  --tabbar-h:64px;        /* bottom tab bar height (phone only) */
+  --safe-b:env(safe-area-inset-bottom,0px);
+  --ease:cubic-bezier(.2,.75,.2,1);
+  /* names used by the grid and keychain styles */
+  --f-logo:var(--font-brand);--f-head:var(--font-head);--f-body:var(--font-body);
+  --fs-h2:clamp(1.9rem,1.35rem + 2.4vw,3rem);--sec:clamp(56px,3.2rem + 3.5vw,104px);--r-xs:8px;--gutter:16px;
+}
+@media(min-width:900px){:root{--hdr-h:70px;--tabbar-h:0px}}
+
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(var(--hdr-h) + 8px)}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;font:400 1rem/1.6 var(--font-body);color:var(--ink);background:var(--white);overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{font-family:var(--font-head);font-weight:600;line-height:1.12;margin:0;letter-spacing:-.01em;text-wrap:balance}
+em{font-style:italic}
+p,figure,dl,dd{margin:0}
+a{color:inherit}
+ul{margin:0;padding:0;list-style:none}
+button{font:inherit;color:inherit}
+.ic{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+main:focus{outline:none}
+.skip{position:absolute;left:12px;top:-120px;z-index:120;background:var(--ink);color:var(--white);padding:12px 18px;border-radius:999px;font-weight:700;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{width:min(100% - 32px,var(--col));margin-inline:auto}
+.eyebrow{display:block;font:800 .72rem/1.2 var(--font-body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+
+/* Black sticker button (brand, kept exactly) + a disabled state */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 26px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:#fff;font:700 .95rem 'Manrope',system-ui,sans-serif;text-decoration:none;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .12s,box-shadow .12s}
+.btn:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)} .btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.btn.alt{background:#fff;color:var(--ink)} .btn.gold{background:var(--gold);color:var(--ink)} .btn.sm{min-height:44px;padding:8px 20px}
+.btn .ic{width:18px;height:18px;stroke-width:2.2}
+.btn:disabled{background:var(--surface);color:var(--muted);border-color:var(--muted);box-shadow:none;transform:none;cursor:not-allowed}
+.sticker{display:inline-block;background:var(--gold);color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:4px 10px;font:600 .88rem/1.2 var(--font-head);transform:rotate(-3deg);box-shadow:2px 2px 0 var(--ink);white-space:nowrap}
+.link{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.link .ic{width:18px;height:18px;stroke-width:2.2}
+.link:hover{text-decoration-color:var(--gold)}
+
+/* ===== Header: logo-only top bar on phones, full header on desktop ===== */
+.hdr{position:relative;z-index:40;background:var(--pink-soft)}
+.hdr-in{display:flex;align-items:center;justify-content:center;min-height:52px;width:min(100% - 32px,var(--col));margin-inline:auto}
+.logo{display:inline-block;font:700 1.5rem/1 var(--font-brand);letter-spacing:.14em;padding:12px 0 12px .14em;text-decoration:none;color:var(--ink)}
+.hdr-nav,.hdr-bag{display:none}
+.count{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:999px;background:var(--gold);border:1.5px solid var(--ink);font-size:.75rem;font-weight:800;line-height:1}
+@media(min-width:900px){
+  .hdr{position:sticky;top:0;height:var(--hdr-h);background:var(--white);border-bottom:1.5px solid var(--ink)}
+  .hdr-in{height:100%;justify-content:space-between;gap:24px}
+  .hdr-nav{display:flex;gap:4px;margin-left:auto}
+  .hdr-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;font-weight:700;font-size:.92rem;text-decoration:none}
+  .hdr-nav a:hover{background:var(--pink-soft)}
+  .hdr-bag{display:inline-flex}
+}
+
+/* ===== Hero: the story carousel ===== */
+.stories{--ch:clamp(420px,70vh,680px);position:relative;overflow:hidden;background:var(--pink-soft);padding:4px 0 36px}
+@supports(height:100svh){.stories{--ch:clamp(420px,70svh,680px)}}
+.stage{position:relative;height:var(--ch);touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.st-slides{position:absolute;inset:0}
+.slide{position:absolute;top:0;left:12px;right:12px;height:100%;display:flex;flex-direction:column;padding:66px 16px 18px;border-radius:var(--r-lg);overflow:hidden;background:var(--surface);box-shadow:var(--shadow-soft);opacity:0;visibility:hidden;z-index:1;transition:opacity .3s ease,visibility 0s linear .3s}
+.slide[data-pos="on"]{opacity:1;visibility:visible;z-index:3;transition:opacity .3s ease}
+.slide:not([data-pos="on"]) .sl-stick{pointer-events:none}
+.s-pink{background:var(--pink)}
+.s-mint{background:var(--mint-soft)}
+.sl-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.sl-art{position:relative;flex:1 1 0;min-height:0;display:flex;align-items:center;justify-content:center;container-type:size;margin-bottom:16px}
+.sl-cap{position:relative;margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;gap:14px}
+.sl-line{font:600 clamp(1.45rem,1.1rem + 1.6vw,1.8rem)/1.5 var(--font-head);letter-spacing:-.01em}
+.sl-line>span{background:var(--white);padding:.08em .34em;border-radius:10px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.sl-stick{transform:rotate(-3deg);transform-origin:left center;margin-left:4px}
+/* slide 2: a shared-post card */
+.post{position:relative;width:62%;width:min(100cqw - 28px,272px,100cqh - 62px);background:var(--white);border:2px solid var(--ink);border-radius:var(--r-md);box-shadow:var(--shadow-hard);transform:rotate(-2deg)}
+.post img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px 14px 0 0}
+.post figcaption{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:2px 8px;padding:8px 12px;font-size:.78rem;line-height:1.2;border-top:2px solid var(--ink)}
+.post figcaption>*{white-space:nowrap}
+.post figcaption b{font-weight:800}
+.post-stk{position:absolute;top:-14px;right:-12px;transform:rotate(7deg)}
+/* slide 3 + Studio band: a chain drawn in line, real charms hanging off it */
+.chain-art{position:relative;width:100%;aspect-ratio:300/170}
+.sl-art .chain-art{width:88%;width:min(100cqw,340px,(100cqh - 34px) * 1.76)}
+.chain-art svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ca-gold{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round}
+.ca-link{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-dasharray:4 3;stroke-linecap:round}
+.ca-end{fill:var(--gold);stroke:var(--ink);stroke-width:1.5}
+.ca-ring{fill:var(--white);stroke:var(--ink);stroke-width:1.5}
+.ca-charm{position:absolute;height:29%;width:auto;aspect-ratio:1;object-fit:contain;object-position:50% 0;transform:translateX(-50%) rotate(var(--r,0deg));transform-origin:50% 0}
+.art-stk{position:absolute;right:2px;bottom:4px;transform:rotate(-4deg);font-size:.8rem}
+/* chrome on top of the active card: progress, name tag, pause, arrows */
+.frame{position:absolute;top:0;left:12px;right:12px;height:100%;z-index:5;pointer-events:none}
+.st-bars{display:flex;gap:4px;padding:12px 14px 0}
+.bar{position:relative;flex:1;height:3px;border-radius:3px;overflow:hidden;background:rgba(23,23,23,.2)}
+.bar i{position:absolute;inset:0;background:var(--ink);border-radius:inherit;transform:scaleX(0);transform-origin:left center}
+.bar.done i{transform:none}
+.bar.on i{animation:st-fill 5s linear forwards}
+.stories.is-paused .bar.on i{animation-play-state:paused}
+@keyframes st-fill{to{transform:none}}
+.st-head{display:flex;align-items:center;justify-content:space-between;padding:6px 6px 0 12px}
+.st-id{display:inline-flex;align-items:baseline;gap:8px;background:var(--white);border-radius:999px;padding:7px 12px 6px;box-shadow:var(--shadow-soft)}
+.st-who{font:700 .9rem/1 var(--font-brand);letter-spacing:.14em}
+.st-tag{font:700 .72rem/1 var(--font-body);color:var(--muted)}
+.st-pause{pointer-events:auto;width:44px;height:44px;display:grid;place-items:center;border:0;background:none;border-radius:50%;cursor:pointer;padding:0}
+.st-pause>span{width:34px;height:34px;border-radius:50%;background:var(--white);display:grid;place-items:center;box-shadow:var(--shadow-soft)}
+.st-pause .ic{width:16px;height:16px;stroke-width:2.6}
+.st-pause .i-play{display:none;fill:currentColor;stroke:none}
+.st-pause.is-play .i-play{display:block}.st-pause.is-play .i-pause{display:none}
+.st-arrow{position:absolute;top:50%;z-index:6;width:44px;height:44px;margin-top:-22px;display:grid;place-items:center;padding:0;border:2px solid var(--ink);border-radius:50%;background:var(--white);box-shadow:2px 2px 0 var(--ink);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .15s,transform .12s,box-shadow .12s}
+.st-arrow.prev{left:8px}.st-arrow.next{right:8px}
+.st-arrow:focus-visible{opacity:1;pointer-events:auto}
+.st-arrow .ic{width:20px;height:20px;stroke-width:2.4}
+.stories .wave{bottom:-1px;color:var(--white)}
+.stories.is-init .slide{transition:none!important}
+@media(min-width:600px){
+  .stories{--cw:340px;--ch:clamp(440px,72vh,560px);padding:28px 0 56px}
+  .slide,.frame{left:50%;right:auto;width:var(--cw);margin-left:calc(var(--cw) / -2)}
+  .sl-line{font-size:1.5rem}
+  .st-arrow{opacity:1;pointer-events:auto}
+  .st-arrow.prev{left:-64px}.st-arrow.next{right:-64px}
+  .st-arrow:hover{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+}
+@supports(height:100svh){@media(min-width:600px){.stories{--ch:clamp(440px,72svh,560px)}}}
+@media(min-width:1100px){
+  .stories{--cw:360px}
+  .slide{transition:transform .55s var(--ease),opacity .45s ease,visibility 0s linear .55s}
+  .slide[data-pos="on"]{transition:transform .55s var(--ease),opacity .45s ease}
+  .slide[data-pos="prev"],.slide[data-pos="next"]{visibility:visible;opacity:.55;z-index:2;cursor:pointer;transition:transform .55s var(--ease),opacity .45s ease}
+  .slide[data-pos="prev"]{transform:translateX(calc(-100% - 56px)) scale(.76)}
+  .slide[data-pos="next"]{transform:translateX(calc(100% + 56px)) scale(.76)}
+  .slide[data-pos="out-l"]{transform:translateX(calc(-200% - 112px)) scale(.6)}
+  .slide[data-pos="out-r"]{transform:translateX(calc(200% + 112px)) scale(.6)}
+  .slide[data-pos="prev"]:hover,.slide[data-pos="next"]:hover{opacity:.8}
+}
+
+/* wavy dividers */
+.wave{position:absolute;left:0;width:100%;height:22px;display:block;pointer-events:none}
+@media(min-width:900px){.wave{height:30px}}
+
+/* ===== The limited waist chain drop (28 Oct 2026; gold band under the one-of-one grid) =====
+   #dropArt holds a placeholder chain drawing until Harsh's photo lands: swap the <svg> for <img>. */
+.drop{position:relative;background:var(--gold);color:var(--ink);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);padding:40px 0 0;overflow:hidden}
+.drop-in{display:grid;gap:16px;justify-items:start}
+.drop .drop-tag{background:var(--ink);color:#fff;border-color:var(--ink);transform:rotate(-2deg)}
+.drop h2{font-size:clamp(2.1rem,1.3rem + 3.4vw,3.4rem);max-width:12ch}
+.drop-txt{font-size:1.05rem;line-height:1.5;max-width:40ch}
+.drop-txt b{font-weight:800}
+.drop-art{margin:10px 0 4px;width:min(100%,560px)}
+.drop-art svg,.drop-art img{display:block;width:100%;height:auto}
+.drop-art img{border:2px solid var(--ink);border-radius:var(--r-md);box-shadow:var(--shadow-hard)}
+.drop-btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:2px}
+.drop-btns .btn{min-height:56px;padding:14px 34px;font-size:1.05rem;box-shadow:none}
+.drop-btns .btn:hover{transform:translateY(-2px);box-shadow:3px 3px 0 var(--ink)}
+.drop-btns .btn:active{transform:scale(.97)}
+.drop-looks{display:grid;gap:8px;width:100%;margin-top:22px}
+.drop-looks-h{font:800 .72rem/1.35 var(--f-body);letter-spacing:.12em;text-transform:uppercase}
+.drop-row{display:grid;grid-auto-flow:column;grid-auto-columns:min(72%,300px);gap:12px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:16px;margin-inline:-16px;padding:4px 16px 36px;scrollbar-width:none;list-style:none;margin-block:0}
+.drop-row::-webkit-scrollbar{display:none}
+.drop-row>li{scroll-snap-align:start}
+.dcard{position:relative;display:flex;flex-direction:column;height:100%;background:var(--white);border:2px solid var(--ink);border-radius:var(--r-md);padding:6px;text-decoration:none;color:var(--ink);transition:transform .15s var(--ease),box-shadow .15s var(--ease)}
+@media(hover:hover){.dcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-hard)}}
+.dcard:active{transform:translateY(0)}
+.dcard img{width:100%;aspect-ratio:960/360;object-fit:cover;border-radius:10px;background:#FDF1E6}
+.dcard .db{display:grid;gap:3px;padding:10px 6px 6px}
+.dcard b{font:600 1.1rem/1.2 var(--font-head)}
+.dcard .dn{font-size:.82rem;color:var(--muted);line-height:1.4}
+.dcard .dp{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px;font-size:.85rem;font-weight:800}
+.dcard .dp>span{display:inline-flex;align-items:center;gap:4px}
+.dcard .dp .ic{width:18px;height:18px;stroke-width:2.4;transition:transform .15s var(--ease)}
+.dcard:hover .dp .ic{transform:translateX(3px)}
+/* charm-name ticker along the bottom edge */
+.drop-marq{background:var(--pink);border-top:2px solid var(--ink);padding:14px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.drop-track{display:flex;align-items:center;width:max-content;animation:drop-marq 36s linear infinite}
+.drop-track span{display:inline-flex;align-items:center;gap:26px;padding-right:26px;font:600 italic 1.45rem/1 var(--font-head);white-space:nowrap}
+.drop-track span::after{content:"\2726";font-style:normal;font-size:1.2rem;color:#8A6400}
+@keyframes drop-marq{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.drop-track{animation:none}}
+@media(min-width:700px){
+  .drop-row{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;margin-inline:0;padding:4px 0 40px;gap:16px}
+}
+@media(min-width:900px){
+  .drop{padding-top:56px}
+  .drop-in{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:56px;row-gap:16px;align-items:center}
+  .drop-tag,.drop h2,.drop-txt,.drop-btns{grid-column:1}
+  .drop-art{grid-column:2;grid-row:1 / span 4;width:100%;margin:0;justify-self:end}
+  .drop-looks{grid-column:1 / -1}
+  .drop-row{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+/* product links on cards (28 Oct 2026) */
+.plink{text-decoration:none}
+.plink:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.media>a{display:block;height:100%}
+
+/* ===== Highlights: avatar rings ===== */
+.hl{padding:16px 0 8px}
+.hl-row{display:flex;gap:14px;overflow-x:auto;padding:12px 16px 12px;scroll-snap-type:x proximity;scroll-padding-inline:16px;scrollbar-width:none}
+.hl-row::-webkit-scrollbar{display:none}
+.hl-row li{flex:none;scroll-snap-align:start}
+.hl-item{display:flex;flex-direction:column;align-items:center;gap:8px;width:84px;padding:0;border:0;background:none;color:var(--ink);text-decoration:none;cursor:pointer}
+.hl-ring{position:relative;display:block;width:78px;height:78px;padding:3px;border:2px solid var(--ink);border-radius:50%;background:var(--white);transition:transform .15s,background .2s}
+.hl-pic{position:relative;display:block;width:100%;height:100%;border-radius:50%;overflow:hidden;background:var(--surface)}
+.hl-pic img{width:100%;height:100%;object-fit:cover}
+.hl-pic img.z{transform:scale(1.7);transform-origin:50% 66%}
+.hl-pic.cl{display:flex;align-items:center;justify-content:center;background:var(--pink)}
+.hl-pic.cl img{width:42%;height:auto;aspect-ratio:1;object-fit:contain;margin:0 -6%}
+.hl-pic.cl img:nth-child(2){transform:translateY(-16%)}
+.hl-label{font-size:.78rem;font-weight:700;line-height:1.2;text-align:center}
+.hl-item:hover .hl-ring{transform:translateY(-2px)}
+.hl-item:focus-visible{outline:none}
+.hl-item:focus-visible .hl-ring{outline:3px solid var(--ink);outline-offset:3px}
+.hl-item[aria-pressed="true"] .hl-ring{background:var(--gold)}
+.hl-item[aria-pressed="true"] .hl-label{font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.hl-item[aria-pressed="true"] .hl-ring::after{content:"";position:absolute;inset:-2px;border:2px solid var(--ink);border-radius:50%;animation:ring-pulse 2.2s ease-out 2}
+@keyframes ring-pulse{from{transform:scale(1);opacity:.7}to{transform:scale(1.2);opacity:0}}
+@media(min-width:900px){
+  .hl{padding:28px 0 12px}
+  .hl-row{justify-content:center;gap:34px;overflow:visible;padding-inline:0}
+  .hl-item{width:96px}.hl-ring{width:90px;height:90px}
+  .hl-label{font-size:.85rem}
+}
+
+
+/* ===== Studio band ===== */
+.studio{position:relative;background:var(--pink);padding:44px 0 68px;margin-top:40px}
+.studio .wave-top{bottom:100%;color:var(--pink)}
+.studio .wave-bottom{bottom:-1px;color:var(--white)}
+.studio-in{display:grid;gap:28px;grid-template-areas:"head" "art" "pick"}
+.studio-head{grid-area:head;display:grid;gap:10px}
+.studio-head h2{font-size:clamp(2.1rem,1.3rem + 3.2vw,3.2rem)}
+.studio-head p{max-width:44ch}
+.studio .eyebrow{color:var(--ink)}
+.studio-art{grid-area:art}
+.arch{position:relative;max-width:420px;min-height:280px;margin-inline:auto;padding:30px 18px 34px;background:var(--white);border:2px solid var(--ink);border-radius:210px 210px var(--r-lg) var(--r-lg);box-shadow:var(--shadow-hard);text-align:center}
+.arch-price{font:500 1rem/1.2 var(--font-head);margin:22px 0 8px}
+.arch-price b{display:block;font-weight:600;font-size:2.1rem;line-height:1.1}
+.arch-stk{position:absolute;left:-10px;bottom:16px}
+.studio-pick{grid-area:pick;display:grid;gap:14px}
+.mini{font:800 .75rem/1.2 var(--font-body);letter-spacing:.12em;text-transform:uppercase;margin-top:6px}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chip{position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;min-height:66px;padding:10px 16px;background:var(--white);border:2px solid var(--ink);border-radius:var(--r-md);box-shadow:3px 3px 0 var(--ink);text-decoration:none;transition:transform .12s,box-shadow .12s}
+.chip:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.chip:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.chip b{font:600 1.05rem/1.2 var(--font-head)}
+.chip>span{font-weight:800;font-size:.92rem}
+.chip-stk{position:absolute;bottom:-12px;right:-6px;font-size:.72rem;padding:2px 8px}
+.chip:target{animation:nudge .6s ease 2;background:var(--pink-soft)}
+@keyframes nudge{25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
+.swatches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sw{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.sw img{width:76px;height:76px;margin-bottom:4px;border-radius:50%;border:2px solid var(--ink);object-fit:cover;background:var(--white)}
+.sw b{font-size:.85rem;line-height:1.2}
+.sw span{font-size:.76rem;line-height:1.3}
+.rule{font-size:.95rem}
+.studio-pick .btn{justify-self:start;margin-top:6px}
+@media(min-width:900px){
+  .studio{padding:72px 0 96px;margin-top:56px}
+  .studio-in{grid-template-columns:minmax(0,1fr) minmax(0,.9fr);grid-template-areas:"head art" "pick art";column-gap:64px;row-gap:22px;align-items:start}
+  .studio-art{align-self:center}
+  .sw img{width:88px;height:88px}
+}
+
+/* ===== Care and sizing ===== */
+.care{padding:64px 0 64px}
+.care-in{display:grid;gap:8px}
+.acc{display:grid;gap:12px}
+.acc details{border:2px solid var(--ink);border-radius:var(--r-md);background:var(--white);transition:background .2s}
+.acc details[open]{background:var(--mint-soft)}
+.acc summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;padding:12px 14px 12px 18px;border-radius:14px;font:600 1.1rem/1.3 var(--font-head);list-style:none;cursor:pointer}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary:hover .pm{transform:rotate(90deg)}
+.pm{position:relative;flex:none;width:32px;height:32px;border:2px solid var(--ink);border-radius:50%;background:var(--white);transition:transform .2s,background .2s}
+.pm::before,.pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;border-radius:2px;background:var(--ink);transition:transform .2s}
+.pm::after{transform:rotate(90deg)}
+.acc details[open] .pm{background:var(--gold)}
+.acc details[open] .pm::after{transform:rotate(0)}
+.acc-body{display:grid;gap:12px;padding:0 18px 18px}
+.sizes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sizes div{padding:10px 6px;border:1.5px solid var(--ink);border-radius:var(--r-sm);background:var(--white);text-align:center}
+.sizes dt{font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.sizes dd{font:600 1.3rem/1.2 var(--font-head)}
+.acc-body ul{display:grid;gap:6px;padding-left:1.1em;list-style:disc}
+@media(min-width:900px){
+  .care{padding:88px 0 80px}
+  .care-in{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
+  .care .sec-head{position:sticky;top:calc(var(--hdr-h) + 24px)}
+}
+
+/* ===== Footer ===== */
+.foot{background:var(--ink);color:var(--white);padding:48px 0 calc(32px + var(--tabbar-h) + var(--safe-b))}
+.foot-in{display:grid;grid-template-columns:1fr 1fr;gap:32px 24px}
+.foot-brand{grid-column:1 / -1;display:grid;gap:8px;justify-items:start}
+.foot .logo{color:var(--white);padding-left:0}
+.foot-brand p{color:var(--white);max-width:36ch}
+.foot h2{margin-bottom:8px;color:var(--gold);font:800 .75rem/1.2 var(--font-body);letter-spacing:.14em;text-transform:uppercase}
+.foot li a,.foot-btn{display:inline-flex;align-items:center;min-height:44px;color:var(--white);text-decoration:none}
+.foot-btn{background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.foot li a:hover,.foot-btn:hover{text-decoration:underline;text-underline-offset:4px}
+.foot :focus-visible{outline-color:var(--white)}
+.foot-contact{display:flex;flex-wrap:wrap;gap:4px 18px}
+.foot-copy{margin-top:28px;padding-top:18px;border-top:1px solid var(--muted);font-size:.85rem}
+@media(min-width:900px){.foot{padding-top:64px}.foot-in{grid-template-columns:2fr 1fr 1fr}.foot-brand{grid-column:auto}}
+
+/* ===== Bottom tab bar (phones and small tablets) ===== */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;padding:0 max(4px,env(safe-area-inset-left,0px)) var(--safe-b);background:var(--white);border-top:1.5px solid var(--ink)}
+.tb{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:var(--tabbar-h);padding:6px 4px;border:0;background:none;color:var(--ink);font:700 .7rem/1.1 var(--font-body);text-decoration:none;cursor:pointer}
+.tb.is-on{font-weight:800}
+.tb.is-on .ic{stroke-width:2.5}
+.tb.is-on::before{content:"";position:absolute;top:0;left:32%;right:32%;height:3px;border-radius:0 0 3px 3px;background:var(--ink)}
+.tb:active .ic{transform:scale(.92)}
+.tb:focus-visible{outline-offset:-4px}
+.tb-count{position:absolute;top:5px;left:calc(50% + 5px);min-width:20px;height:20px;padding:0 5px;display:grid;place-items:center;border:1.5px solid var(--ink);border-radius:999px;background:var(--gold);font-size:.68rem;font-weight:800;line-height:1}
+.tb-count[data-n="0"]{display:none}
+@media(min-width:900px){.tabbar{display:none}}
+@media(max-width:899.98px){.toast{bottom:calc(var(--tabbar-h) + 14px + var(--safe-b))}}
+/* while the bag is open, messages show at the top so they never cover its Checkout button */
+html.bag-open .toast{top:calc(14px + env(safe-area-inset-top,0px));bottom:auto;transform:translateY(-20px)}
+html.bag-open .toast.on{transform:none}
+
+/* ===== From option A: tags, filters, the one-of-one grid and the keychain band ===== */
+.btn[aria-disabled="true"],.btn[aria-disabled="true"]:hover,.btn[aria-disabled="true"]:active{cursor:default;transform:none;box-shadow:none}
+/* ---------- stickers / tags ---------- */
+.tag{display:inline-block;background:var(--gold);color:var(--ink);border:2px solid var(--ink);border-radius:var(--r-xs);padding:3px 10px;font:800 .72rem/1.35 var(--f-body);letter-spacing:.12em;text-transform:uppercase;transform:rotate(-3deg)}
+@keyframes wob{0%,100%{transform:rotate(var(--r,0deg))}30%{transform:rotate(calc(var(--r,0deg) - 5deg)) scale(1.03)}65%{transform:rotate(calc(var(--r,0deg) + 3deg)) scale(1.03)}}
+@media (hover:hover) and (prefers-reduced-motion:no-preference){ .stk:hover,.wob:hover{animation:wob .55s ease-in-out} }
+.count.bump,.tb-count.bump{animation:bump .35s ease-out}
+@keyframes bump{40%{transform:scale(1.25)}}
+.pill{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 16px;border:2px solid var(--ink);border-radius:var(--r-pill);background:var(--white);color:var(--ink);font:700 .88rem var(--f-body);white-space:nowrap;text-decoration:none;cursor:pointer}
+.pill.gold{background:var(--gold)}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--white)}
+@media (hover:hover){ .pill:not([aria-pressed="true"]):not(.gold):hover{background:var(--pink-soft)} }
+.pill .n{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:var(--r-pill);background:var(--pink-soft);color:var(--ink);font-size:.72rem;font-weight:800}
+.pill[aria-pressed="true"] .n{background:var(--gold)}
+/* ---------- sections ---------- */
+.sec{padding-block:var(--sec)}
+.sec .sec-head{justify-items:start;gap:var(--s3);margin-bottom:var(--s6);max-width:720px}
+.sec .sec-head h2{font-size:var(--fs-h2)}
+.sec .sec-head p:not(.tag){color:var(--muted);font-size:1.02rem;max-width:52ch}
+.sec-head p.tag{color:var(--ink)}
+.wv{position:relative}
+.wv::before{content:"";position:absolute;left:0;right:0;top:-22px;height:24px;background-image:var(--wave);background-repeat:repeat-x;background-size:120px 24px;pointer-events:none}
+.wv-mint{--wave:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='24' viewBox='0 0 120 24'%3E%3Cpath d='M0 24V12Q30 0 60 12T120 12V24Z' fill='%23D8F1E7'/%3E%3C/svg%3E")}
+/* ---------- design grid ---------- */
+.filters{display:flex;gap:var(--s2);overflow-x:auto;scrollbar-width:none;margin:0 calc(-1*var(--gutter)) var(--s5);padding:4px var(--gutter) 6px}
+.filters::-webkit-scrollbar{display:none}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s4) var(--s3)}
+@media (max-width:359.98px){ .grid{grid-template-columns:minmax(0,1fr)} }  /* keeps the piece control's taps at 44px+ on tiny phones */
+@media (min-width:700px){ .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s5)} }
+@media (min-width:1024px){ .grid{grid-template-columns:repeat(4,minmax(0,1fr))} }
+
+.card{position:relative;display:flex;flex-direction:column;background:var(--white);border:2px solid var(--ink);border-radius:var(--r-md);padding:6px;container-type:inline-size;transition:transform .15s ease,box-shadow .15s ease}
+@media (hover:hover){ .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-hard)} }
+.card:focus{outline:none} .card:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.card.flash{box-shadow:0 0 0 4px var(--gold),var(--shadow-hard)}
+.media{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:var(--surface)}
+.media img{width:100%;height:100%;object-fit:cover}
+.mtag{position:absolute;z-index:2;top:8px;left:8px;border:1.5px solid var(--ink);border-radius:6px;padding:2px 8px;font:800 .66rem/1.4 var(--f-body);letter-spacing:.08em;text-transform:uppercase;transform:rotate(-3deg)}
+.m-bag{background:var(--mint)} .m-sold{background:var(--ink);color:var(--white)}
+.pictured{position:absolute;z-index:2;left:6px;bottom:6px;max-width:calc(100% - 12px);background:var(--white);border:1.5px solid var(--ink);border-radius:var(--r-pill);padding:1px 8px;font:700 .66rem/1.5 var(--f-body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.body{display:flex;flex-direction:column;gap:var(--s2);flex:1;padding:var(--s3) 4px 4px}
+.trow{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--s2)}
+.card h3{font-size:1.02rem;line-height:1.2}
+.price{font:600 1.05rem/1.2 var(--f-head);white-space:nowrap;font-variant-numeric:tabular-nums}
+.price.tick{animation:tick .3s ease-out}
+@keyframes tick{from{opacity:0;transform:translateY(-4px)}}
+
+/* segmented piece control (a radiogroup) */
+.seg{margin-top:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1.5px solid var(--ink);border-radius:var(--r-sm);overflow:hidden;background:var(--white)}
+.sg{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:44px;padding:4px 2px;border:0;border-left:1.5px solid var(--ink);background:var(--white);color:var(--ink);line-height:1.15;text-align:center;cursor:pointer}
+.sg:first-child{border-left:0}
+.sl{font-size:.74rem;font-weight:800}
+.sp{font-size:.7rem;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums}
+.sg[aria-checked="true"]{background:var(--ink);color:var(--white)}
+.sg[aria-checked="true"] .sp{color:var(--gold)}
+.sg:focus-visible{outline:none;box-shadow:inset 0 0 0 2px var(--white),inset 0 0 0 4px var(--ink)}
+@media (hover:hover){ .sg:not([aria-checked="true"]):not([aria-disabled="true"]):hover{background:var(--pink-soft)} }
+.sg[aria-disabled="true"]{cursor:not-allowed}
+.sg[aria-disabled="true"]:not([aria-checked="true"]){background:var(--surface);color:var(--muted)}
+.sg.is-sold .sl{text-decoration:line-through}
+/* compact on phone: short words; full names once the card is wide enough */
+.sg .lf{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@container (min-width:228px){
+  .sg .lf{position:static;width:auto;height:auto;overflow:visible;clip:auto}
+  .sg .ls{display:none}
+  .sl{font-size:.78rem} .sp{font-size:.74rem}
+}
+
+.add{width:100%}
+.btn.sm.add{padding-inline:12px}
+.add.in-bag{background:var(--mint);color:var(--ink)}
+.add.in-bag::before{content:"";flex:none;width:11px;height:6px;border-left:2.5px solid currentColor;border-bottom:2.5px solid currentColor;transform:translateY(-2px) rotate(-45deg)}
+.add.sold{background:var(--surface);color:var(--muted);border-color:var(--muted)}
+.card.is-sold .media img{filter:grayscale(1);opacity:.55}
+.card.is-sold .price{text-decoration:line-through;color:var(--muted)}
+.card.is-sold .sg[aria-checked="true"]{background:var(--surface);color:var(--muted)}
+.card.is-sold .sg[aria-checked="true"] .sp{color:var(--muted)}
+.more{display:flex;justify-content:center;margin-top:var(--s6)}
+/* ---------- keychains (mint band) ---------- */
+.keys{background:var(--mint)}
+.krow{display:grid;grid-auto-flow:column;grid-auto-columns:min(60%,232px);gap:var(--s3);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gutter);margin-inline:calc(-1*var(--gutter));padding:6px var(--gutter) 14px;scrollbar-width:none}
+.krow::-webkit-scrollbar{display:none}
+.krow>li{scroll-snap-align:start}
+.hint{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin:calc(-1*var(--s4)) 0 var(--s2);font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.kmeta{font-size:.85rem;color:var(--muted)}
+.kmeta b{font:600 1rem var(--f-head);color:var(--ink)}
+.kbuy{margin-top:auto}
+.kstep{display:flex;align-items:center;justify-content:space-between;min-height:44px;border:2px solid var(--ink);border-radius:var(--r-pill);background:var(--white);box-shadow:var(--shadow-hard)}
+/* (class names kept distinct from the bag drawer's own .kq / .qb / .qn) */
+.kstep .kbtn{display:grid;place-items:center;width:46px;height:44px;margin:-2px 0;border:0;border-radius:var(--r-pill);background:none;color:var(--ink);font:700 1.35rem/1 var(--f-body);cursor:pointer}
+.kstep .kbtn:focus-visible{outline:3px solid var(--ink);outline-offset:-5px}
+.kstep .kbtn[aria-disabled="true"]{color:var(--muted);cursor:not-allowed}
+@media (hover:hover){ .kstep .kbtn:not([aria-disabled="true"]):hover{background:var(--pink-soft)} }
+.kstep .kcount{font-size:.82rem;font-weight:700;white-space:nowrap}
+.kstep .kcount b{font:600 1.15rem var(--f-head);margin-right:3px;font-variant-numeric:tabular-nums}
+@media (min-width:900px){
+  .krow{grid-auto-flow:row;grid-template-columns:repeat(5,minmax(0,1fr));overflow:visible;margin-inline:0;padding:0;gap:var(--s4)}
+  .hint{display:none}
+}
+/* the Studio band's pink wave sits straight on the mint keychain band */
+.keys + .studio{margin-top:0}
+
+/* ===== Reduced motion: no auto-advance, no slides, no pulses ===== */
+@media(prefers-reduced-motion:reduce){
+  .bar.on i{animation:none;transform:none}
+  .st-pause{display:none}
+  .slide,.slide[data-pos]{transition:none!important}
+  .hl-item[aria-pressed="true"] .hl-ring::after,.chip:target,.count.bump,.tb-count.bump,.price.tick{animation:none}
+  .btn,.chip,.st-arrow,.hl-ring,.pm,.pm::after,.card{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="top">
+  <div class="hdr-in">
+    <a class="logo" href="#top" aria-label="Charmiè, back to top">CHARMIÈ</a>
+    <nav class="hdr-nav" aria-label="Main">
+      <a href="#shop">Shop</a>
+      <a href="#keychains">Keychains</a>
+      <a href="studio.html" data-studio="">Charm Studio</a>
+      <a href="#care">Care and sizing</a>
+    </nav>
+    <button class="btn sm alt hdr-bag" type="button" data-bag-open>
+      <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11a1.5 1.5 0 0 1-1.5 1.4H8a1.5 1.5 0 0 1-1.5-1.4z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"/></svg>
+      Bag <span class="count" data-bag-count>0</span>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <h1 class="vh">Charmiè: tiny charms, your story</h1>
+
+  <!-- ===== Hero: stories ===== -->
+  <section class="stories" id="stories" aria-roledescription="carousel" aria-label="Charmiè stories">
+    <div class="stage">
+      <div class="frame">
+        <div class="st-bars" aria-hidden="true"><span class="bar"><i></i></span><span class="bar"><i></i></span><span class="bar"><i></i></span><span class="bar"><i></i></span></div>
+        <div class="st-head">
+          <span class="st-id" aria-hidden="true"><span class="st-who">CHARMIÈ</span><span class="st-tag">Shop</span></span>
+          <button class="st-pause" type="button" aria-label="Pause stories"><span>
+            <svg class="ic i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6v12M15.5 6v12"/></svg>
+            <svg class="ic i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"/></svg>
+          </span></button>
+        </div>
+        <button class="st-arrow prev" type="button" aria-label="Previous story"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6 8.5 12l6 6"/></svg></button>
+        <button class="st-arrow next" type="button" aria-label="Next story"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button>
+      </div>
+
+      <div class="st-slides" aria-live="off">
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="1 of 4" data-tag="Shop" data-pos="on">
+          <img class="sl-photo" src="assets/photos/hero-800.webp" srcset="assets/photos/hero-800.webp 800w, assets/photos/hero.webp 1200w" sizes="(min-width: 600px) 840px, 105vh" width="1200" height="800" fetchpriority="high" draggable="false" style="object-position:30% 50%" alt="Two gold necklaces with enamel charms, including cherries, a heart, a unicorn and a rose, on a marble tray">
+          <div class="sl-cap">
+            <p class="sl-line"><span>Tiny charms.<br><em>Your</em> story.</span></p>
+            <div class="sl-stick"><a class="btn" href="#shop">Shop designs <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </div>
+
+        <div class="slide s-pink" role="group" aria-roledescription="slide" aria-label="2 of 4" data-tag="One of one" data-pos="next">
+          <div class="sl-art">
+            <figure class="post">
+              <img src="assets/designs/d25.webp" srcset="assets/designs/d25-400.webp 400w, assets/designs/d25.webp 800w" sizes="272px" width="800" height="800" draggable="false" decoding="async" alt="Wonderland necklace with a white rabbit, Saturn, a whale tail, a pink heart and a card soldier">
+              <figcaption><b>Wonderland</b><span>Necklace · <span data-price="ready.necklace">₹799</span></span></figcaption>
+              <span class="sticker post-stk" aria-hidden="true">One of one</span>
+            </figure>
+          </div>
+          <div class="sl-cap">
+            <p class="sl-line"><span>One of one.<br>Once it’s <em>gone</em>, it’s gone.</span></p>
+            <div class="sl-stick"><button class="btn" type="button" data-qv="25" id="cherryBtn">See Wonderland <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+          </div>
+        </div>
+
+        <div class="slide s-mint" role="group" aria-roledescription="slide" aria-label="3 of 4" data-tag="Charm Studio" data-pos="out-l">
+          <div class="sl-art">
+            <div class="chain-art" data-charms="5"></div>
+            <span class="sticker art-stk" aria-hidden="true"><span data-charm-count>35</span> charms to pick from</span>
+          </div>
+          <div class="sl-cap">
+            <p class="sl-line"><span>Build <em>yours</em> from <span data-price="custom.bracelet">₹650</span>.<br><span data-num="includedCharms">5</span> charms included.</span></p>
+            <div class="sl-stick"><a class="btn gold" href="studio.html" data-studio="">Open the Studio <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </div>
+
+        <div class="slide" role="group" aria-roledescription="slide" aria-label="4 of 4" data-tag="Keychains" data-pos="prev">
+          <img class="sl-photo" src="assets/keychains/pup-love.webp" width="600" height="600" draggable="false" decoding="async" style="object-position:62% 50%" alt="Gold keychain with a black paw-print charm and a white puppy charm">
+          <div class="sl-cap">
+            <p class="sl-line"><span>Keychains from <span data-price="keychainFrom">₹299</span>.<br>Clip one on <em>everything</em>.</span></p>
+            <div class="sl-stick"><a class="btn" href="#keychains">Shop keychains <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <svg class="wave" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 20C120 2 240 2 360 20s240 18 360 0 240-18 360 0 240 18 360 0V40H0z"/></svg>
+  </section>
+
+  <!-- ===== Highlights ===== -->
+  <section class="hl" id="highlights" aria-label="Highlights">
+    <ul class="hl-row" id="hlRow"></ul>
+  </section>
+
+  <!-- ONE OF ONE DESIGNS -->
+  <section class="sec" id="shop" aria-labelledby="shop-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tag">One of one</p>
+        <h2 id="shop-h">Made once. Made for <em>you</em>.</h2>
+        <p>Each design is made just once. Wear it as a bracelet, anklet or necklace, with <span data-num="includedCharms">5</span> charms included.</p>
+      </div>
+      <div class="filters" id="filters" role="group" aria-label="Filter designs">
+        <button type="button" class="pill" data-filter="all" aria-pressed="true">All <span class="n" data-count="all">20</span></button>
+        <button type="button" class="pill" data-filter="bracelet" aria-pressed="false">Bracelets <span class="n" data-count="bracelet">5</span></button>
+        <button type="button" class="pill" data-filter="anklet" aria-pressed="false">Anklets <span class="n" data-count="anklet">7</span></button>
+        <button type="button" class="pill" data-filter="necklace" aria-pressed="false">Necklaces <span class="n" data-count="necklace">8</span></button>
+      </div>
+      <p class="vh" id="gridStatus" role="status" aria-live="polite"></p>
+      <ul class="grid" id="grid"></ul>
+      <div class="more" id="moreWrap"><button type="button" class="btn alt" id="moreBtn" aria-controls="grid">Show all <span data-count="all">20</span></button></div>
+    </div>
+  </section>
+
+  <!-- ===== The limited waist chain drop (28 Oct 2026): gold band, sits under the one-of-one grid ===== -->
+  <section class="drop" id="drop" aria-labelledby="dropTitle">
+    <div class="wrap drop-in">
+      <p class="tag drop-tag">Limited drop</p>
+      <h2 id="dropTitle">The waist chain is <em>here</em></h2>
+      <p class="drop-txt">A limited drop. Build yours with <span data-num="includedCharms">5</span> charms included, <b data-price="custom.waist">₹1,199</b>.</p>
+      <figure class="drop-art" id="dropArt" aria-hidden="true">
+        <!-- placeholder chain drawing; replace with <img src="assets/waist/hero.webp" width="1120" height="640" alt=""> when the photo is ready -->
+        <svg viewBox="0 0 600 150" fill="none" focusable="false">
+          <path d="M14 18C130 92 220 128 300 128s170-36 286-110" stroke="#171717" stroke-width="7" stroke-linecap="round"/>
+          <path d="M14 18C130 92 220 128 300 128s170-36 286-110" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="6 7"/>
+          <circle cx="180" cy="104" r="9" fill="#fff" stroke="#171717" stroke-width="3"/>
+          <circle cx="420" cy="104" r="9" fill="#fff" stroke="#171717" stroke-width="3"/>
+          <circle cx="300" cy="131" r="14" fill="#F7D6E2" stroke="#171717" stroke-width="3"/>
+        </svg>
+      </figure>
+      <div class="drop-btns" id="dropBtns">
+        <a class="btn" href="studio.html#p=waist" data-studio="p=waist">Design a waist chain</a>
+      </div>
+      <div class="drop-looks">
+        <p class="drop-looks-h" id="dropLooksH">Or start from a look</p>
+        <ul class="drop-row" id="dropRow" aria-labelledby="dropLooksH"></ul>
+      </div>
+    </div>
+    <div class="drop-marq" aria-hidden="true"><div class="drop-track" id="dropMarq"></div></div>
+  </section>
+
+  <!-- KEYCHAINS -->
+  <section class="sec keys wv wv-mint" id="keychains" aria-labelledby="keys-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="tag">From <span data-inr="keychainFrom">₹299</span></p>
+        <h2 id="keys-h">Keychains, ready to <em>clip</em></h2>
+        <p>Little charm keychains for your keys, bag or backpack. Pick a favourite, or a few.</p>
+      </div>
+      <p class="hint" aria-hidden="true">Swipe for all <span data-key-count>10</span> <span>→</span></p>
+      <ul class="krow" id="krow"></ul>
+    </div>
+  </section>
+
+  <!-- ===== Studio band ===== -->
+  <section class="studio" id="studio" aria-labelledby="studioTitle">
+    <svg class="wave wave-top" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 20C120 2 240 2 360 20s240 18 360 0 240-18 360 0 240 18 360 0V40H0z"/></svg>
+    <div class="wrap studio-in">
+      <div class="studio-head">
+        <span class="eyebrow">Charm Studio</span>
+        <h2 id="studioTitle">Make it <em>yours</em>.</h2>
+        <p>Choose a piece and a chain, then pick your charms from <span data-charm-count>35</span>. We make it by hand.</p>
+      </div>
+      <div class="studio-art">
+        <div class="arch">
+          <p class="arch-price">from <b data-price="custom.bracelet">₹650</b></p>
+          <div class="chain-art" data-charms="5"></div>
+          <span class="sticker arch-stk"><span data-num="includedCharms">5</span> charms included</span>
+        </div>
+      </div>
+      <div class="studio-pick">
+        <h3 class="mini">Pick a piece</h3>
+        <ul class="chips">
+          <li><a class="chip" href="studio.html#p=bracelet" data-studio="p=bracelet"><b>Bracelet</b><span data-price="custom.bracelet">₹650</span></a></li>
+          <li><a class="chip" href="studio.html#p=anklet" data-studio="p=anklet"><b>Anklet</b><span data-price="custom.anklet">₹750</span></a></li>
+          <li><a class="chip" href="studio.html#p=necklace" data-studio="p=necklace"><b>Necklace</b><span data-price="custom.necklace">₹850</span></a></li>
+          <li><a class="chip" id="piece-waist" href="studio.html#p=waist" data-studio="p=waist"><b>Waist chain</b><span data-price="custom.waist">₹1,199</span><span class="sticker chip-stk">Limited drop</span></a></li>
+        </ul>
+        <h3 class="mini">Pick a chain</h3>
+        <ul class="swatches">
+          <li class="sw"><img src="assets/chains/g1.webp" width="200" height="200" loading="lazy" decoding="async" alt="Close-up of the textured curb chain"><b>Textured curb</b><span>Sparkly, our classic</span></li>
+          <li class="sw"><img src="assets/chains/g2.webp" width="200" height="200" loading="lazy" decoding="async" alt="Close-up of the double-link chain"><b>Double-link</b><span>Flat, bold, a little luxe</span></li>
+          <li class="sw"><img src="assets/chains/g3.webp" width="200" height="200" loading="lazy" decoding="async" alt="Close-up of the fine curb chain"><b>Fine curb</b><span>Delicate and barely-there</span></li>
+        </ul>
+        <p class="rule"><b><span data-num="includedCharms">5</span> charms included.</b> Each extra charm is +<span data-price="extraCharm">₹100</span>, up to <span data-num="maxCharms">12</span>.</p>
+        <a class="btn" href="studio.html" data-studio="">Open the Studio <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+    <svg class="wave wave-bottom" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path fill="currentColor" d="M0 20C120 2 240 2 360 20s240 18 360 0 240-18 360 0 240 18 360 0V40H0z"/></svg>
+  </section>
+
+  <!-- ===== Care and sizing ===== -->
+  <section class="care" id="care" aria-labelledby="careTitle">
+    <div class="wrap care-in">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Care and sizing</span>
+          <h2 id="careTitle">Good to <em>know</em>.</h2>
+        </div>
+        <p>Little things that keep your charms happy.</p>
+      </div>
+      <div class="acc">
+        <details id="care-sizes" open>
+          <summary>Sizes<span class="pm" aria-hidden="true"></span></summary>
+          <div class="acc-body">
+            <dl class="sizes">
+              <div><dt>Bracelet</dt><dd>7 in</dd></div>
+              <div><dt>Anklet</dt><dd>9 in</dd></div>
+              <div><dt>Necklace</dt><dd>16 in</dd></div>
+            </dl>
+            <p>Each one comes with a 2 in extender, so you can adjust the fit.</p>
+          </div>
+        </details>
+        <details id="care-care">
+          <summary>Caring for your charms<span class="pm" aria-hidden="true"></span></summary>
+          <div class="acc-body">
+            <ul>
+              <li>Keep them away from water and perfume.</li>
+              <li>Wipe gently with a soft, dry cloth.</li>
+              <li>Store each piece in a pouch when you’re not wearing it.</li>
+            </ul>
+          </div>
+        </details>
+        <details id="care-materials">
+          <summary>What it’s made of<span class="pm" aria-hidden="true"></span></summary>
+          <div class="acc-body"><p>18k gold-tone chains, nickel-free and gentle on skin, with enamel and metal charms. Every piece is made by hand.</p></div>
+        </details>
+        <details id="care-shipping">
+          <summary>Shipping and payment<span class="pm" aria-hidden="true"></span></summary>
+          <div class="acc-body"><p><span data-note="ship">Shipping ₹79 on every order.</span> <span data-note="pay">Cash on delivery.</span></p></div>
+        </details>
+        <details id="care-exchange">
+          <summary>7-day exchange<span class="pm" aria-hidden="true"></span></summary>
+          <div class="acc-body"><p>Not quite right? You can exchange it within 7 days.</p></div>
+        </details>
+        <details id="care-oneofone">
+          <summary>What “one of one” means<span class="pm" aria-hidden="true"></span></summary>
+          <div class="acc-body"><p>Each ready-made design exists once. When it’s sold, it’s gone. You can still build something like it in the <a href="studio.html" data-studio="">Charm Studio</a>.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" id="footer">
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <a class="logo" href="#top" aria-label="Charmiè, back to top">CHARMIÈ</a>
+      <p>Girl-led, made by hand. Tiny charms for your story.</p>
+      <ul class="foot-contact" id="footContact" hidden></ul>
+    </div>
+    <nav aria-labelledby="footShop">
+      <h2 id="footShop">Shop</h2>
+      <ul>
+        <li><a href="#shop" data-filter-link="bracelet">Bracelets</a></li>
+        <li><a href="#shop" data-filter-link="anklet">Anklets</a></li>
+        <li><a href="#shop" data-filter-link="necklace">Necklaces</a></li>
+        <li><a href="#keychains">Keychains</a></li>
+        <li><a href="#drop">Waist chain drop</a></li>
+        <li><a href="studio.html" data-studio="">Charm Studio</a></li>
+      </ul>
+    </nav>
+    <nav aria-labelledby="footHelp">
+      <h2 id="footHelp">Help</h2>
+      <ul>
+        <li><a href="#care">Care and sizing</a></li>
+        <li><a href="#care-exchange">7-day exchange</a></li>
+        <li><a href="#care-shipping">Shipping</a></li>
+        <li><button type="button" class="foot-btn" data-welcome-open>10% off your first order</button></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap foot-copy"><p>© 2026 Charmiè</p></div>
+</footer>
+
+<nav class="tabbar" aria-label="Quick links">
+  <a class="tb" href="#top" data-tab="home"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.2 12 4l8 6.2V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/></svg><span>Home</span></a>
+  <a class="tb" href="#shop" data-tab="shop"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></svg><span>Shop</span></a>
+  <a class="tb" href="studio.html" data-studio="" data-tab="studio"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3.5l1.7 4.8 4.8 1.7-4.8 1.7L11 16.5l-1.7-4.8L4.5 10l4.8-1.7z"/><path d="M18 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg><span>Studio</span></a>
+  <button class="tb" type="button" data-bag-open><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5.5 8.5h13l-1 11a1.5 1.5 0 0 1-1.5 1.4H8a1.5 1.5 0 0 1-1.5-1.4z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"/></svg><span>Bag</span><span class="tb-count" data-bag-count data-n="0">0</span></button>
+</nav>
+
+<script src="js/core.js?v=20261116"></script>
+<script>
+(function(){
+  'use strict';
+  const C = window.Charmie;
+  if (!C) return;
+  const $ = (s, el) => (el || document).querySelector(s);
+  const $$ = (s, el) => Array.from((el || document).querySelectorAll(s));
+  const esc = C.esc;
+  const html = document.documentElement;
+  const RM = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const behavior = () => (RM.matches ? 'auto' : 'smooth');
+  const listJoin = a => a.length < 2 ? a.join('') : a.slice(0, -1).join(', ') + ' and ' + a[a.length - 1];
+
+  /* ---------- copy that comes from Charmie, so prices never drift from the store ---------- */
+  const at = (o, p) => p.split('.').reduce((v, k) => (v == null ? v : v[k]), o);
+  $$('[data-price]').forEach(el => { const v = at(C.PRICING, el.dataset.price); if (typeof v === 'number') el.textContent = C.inr(v); });
+  $$('[data-num]').forEach(el => { const v = at(C.PRICING, el.dataset.num); if (typeof v === 'number') el.textContent = v; });
+  $$('[data-studio]').forEach(a => { a.href = C.studioUrl(a.dataset.studio); });
+  $$('[data-design-count]').forEach(el => { el.textContent = C.PRODUCTS.length; });
+  $$('[data-note="ship"]').forEach(el => { el.textContent = C.shippingNote(); });
+  $$('[data-note="pay"]').forEach(el => { el.textContent = C.paymentNote(); });
+
+  /* contact links render only when Charmie.CONTACT has a value */
+  const CT = C.CONTACT || {}, contacts = [];
+  if (CT.instagram) contacts.push({label:'Instagram', href: /^https?:/i.test(CT.instagram) ? CT.instagram : 'https://instagram.com/' + String(CT.instagram).replace(/^@/, '')});
+  if (CT.whatsapp) contacts.push({label:'WhatsApp', href:'https://wa.me/' + String(CT.whatsapp).replace(/\D/g, '')});
+  if (CT.email) contacts.push({label:'Email us', href:'mailto:' + CT.email});
+  if (contacts.length){
+    const box = $('#footContact');
+    box.innerHTML = contacts.map(c => `<li><a href="${esc(c.href)}"${/^https?:/.test(c.href) ? ' target="_blank" rel="noopener"' : ''}>${esc(c.label)}</a></li>`).join('');
+    box.hidden = false;
+  }
+  if (CT.instagram){
+    const a = document.createElement('a');
+    a.className = 'btn sm alt'; a.href = contacts[0].href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Follow on Instagram';
+    $('#dropBtns').appendChild(a);
+  }
+
+  /* ---------- the waist chain drop: four looks, each a Studio link with the charms placed, plus the charm ticker ---------- */
+  $('#dropRow').innerHTML = (C.WAIST_DROP || []).map((w, i) => {
+    return `<li><a class="dcard" href="${esc(C.waistUrl(w))}">`
+      + `<img src="${esc(C.waistImg(w.slug))}" width="960" height="360" alt="${esc(w.name)} waist chain: ${esc(w.names)} on a gold chain"${i ? ' loading="lazy"' : ''} decoding="async">`
+      + `<span class="db"><b>${esc(w.name)}</b><span class="dn">${esc(w.line)} ${esc(w.names.charAt(0).toUpperCase() + w.names.slice(1))}.</span>`
+      + `<span class="dp"><span>${C.inr(C.PRICING.custom.waist)} · ${C.CHAIN_NAME[w.chain]}</span><span>Open in Studio <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></span></a></li>`;
+  }).join('');
+  (function(){
+    const names = ['Coin', 'Cherry', 'Heart', 'Evil eye', 'Rainbow', 'Butterfly', 'Star', 'Bubble tea', 'Plane', 'Strawberry', 'Hamsa', 'Bow', 'Globe', 'Cupcake'];
+    const run = names.map(n => '<span>' + esc(n) + '</span>').join('');
+    $('#dropMarq').innerHTML = run + run; /* two copies: the track slides by half its width and loops */
+  })();
+
+  /* ---------- highlights (rings for the three pieces filter the design grid below) ---------- */
+  /* a piece gets a ring only when a design is photographed that way; a single piece just links to the grid */
+  const HL_PIECES = ['bracelet', 'anklet', 'necklace'].map(k => ({k, p:C.PRODUCTS.find(p => p.type === k)})).filter(x => x.p);
+  const HL = HL_PIECES.map(x => {
+    const h = {label:C.PLURAL[x.k], img:C.designImg(x.p.id, 'sm'), size:400, zoom:true};
+    if (HL_PIECES.length > 1) h.f = x.k; else h.href = '#shop';
+    return h;
+  }).concat([
+    {href:'#keychains', label:'Keychains', img:C.keyImg('glam-girl', true), size:300},
+    {href:'#piece-waist', label:'Waist chain', img:C.ROOT + 'assets/chains/g2.webp', size:200},
+    {href:'#studio', label:'Studio', charms:3}
+  ]);
+  $('#hlRow').innerHTML = HL.map(h => {
+    const pic = h.charms
+      ? `<span class="hl-pic cl" data-charm-imgs="${h.charms}"></span>`
+      : `<span class="hl-pic"><img${h.zoom ? ' class="z"' : ''} src="${esc(h.img)}" width="${h.size}" height="${h.size}" alt="" loading="lazy" decoding="async"></span>`;
+    const inner = `<span class="hl-ring">${pic}</span><span class="hl-label">${h.label}</span>`;
+    return '<li>' + (h.f
+      ? `<button class="hl-item" type="button" data-filter="${h.f}" data-jump aria-pressed="false">${inner}</button>`
+      : `<a class="hl-item" href="${h.href}">${inner}</a>`) + '</li>';
+  }).join('');
+
+  /* ---------- one-of-one grid + keychains (option A), with its own helpers ---------- */
+  const shop = (function(){
+    const C = window.Charmie;
+    if (!C) return;
+    const P = C.PRICING, inr = C.inr, esc = C.esc;
+    const $ = (s, el = document) => el.querySelector(s);
+    const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+    const KINDS = ['bracelet', 'anklet', 'necklace'];
+    const SHORT = {bracelet:'Wrist', anklet:'Ankle', necklace:'Neck'};   /* compact labels in narrow cards */
+    const lower = k => C.KIND[k].toLowerCase();
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    const behaviour = () => reduce.matches ? 'auto' : 'smooth';
+    const pathIn = (obj, path) => path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj);
+    const replay = (el, cls) => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
+  
+    /* ---------- 1. copy that comes from the shared data ---------- */
+    $$('[data-inr]').forEach(el => { const v = pathIn(P, el.dataset.inr); if (typeof v === 'number') el.textContent = inr(v); });
+    $$('[data-num]').forEach(el => { const v = pathIn(P, el.dataset.num); if (typeof v === 'number') el.textContent = String(v); });
+    $$('[data-ship]').forEach(el => { const v = C.SHIPPING[el.dataset.ship]; if (typeof v === 'number') el.textContent = inr(v); });
+    $$('[data-note="shipping"]').forEach(el => { el.textContent = C.shippingNote(); });
+    $$('[data-note="payment"]').forEach(el => { el.textContent = C.paymentNote(); });
+    $$('[data-studio]').forEach(a => { a.href = C.studioUrl(a.dataset.studio); });
+    $$('[data-key-count]').forEach(el => { el.textContent = String(C.KEYCHAINS.length); });
+
+    /* ---------- 2. one-of-one design grid ---------- */
+    const FEAT = C.FEATURED.filter(id => C.byId(id));
+    const ORDER = FEAT.concat(C.PRODUCTS.map(p => p.id).filter(id => FEAT.indexOf(id) < 0));
+    const grid = $('#grid'), status = $('#gridStatus'), moreWrap = $('#moreWrap'), moreBtn = $('#moreBtn');
+    const cards = {}, chosen = {};
+    const state = {filter:'all', expanded:false};
+    const designSrc = id => `src="${C.designImg(id, 'sm')}" srcset="${C.designImg(id, 'sm')} 400w, ${C.designImg(id)} 800w"`;
+  
+    const counts = {all: C.PRODUCTS.length};
+    KINDS.forEach(k => { counts[k] = C.PRODUCTS.filter(p => p.type === k).length; });
+    $$('[data-count]').forEach(el => { el.textContent = String(counts[el.dataset.count]); });
+    /* a piece with no design loses its filter; with one piece left the pill row has nothing to filter */
+    KINDS.forEach(k => { if (!counts[k]) $$(`#filters [data-filter="${k}"], a[data-filter-link="${k}"]`).forEach(el => { (el.closest('li') || el).hidden = true; }); });
+    if (KINDS.filter(k => counts[k]).length < 2) $('#filters').hidden = true;
+  
+    grid.innerHTML = ORDER.map(id => {
+      const p = C.byId(id), name = esc(p.name);
+      const segs = KINDS.map(k => `<button type="button" class="sg" role="radio" data-kind="${k}" aria-checked="false" tabindex="-1">`
+        + `<span class="sl"><span class="lf">${C.KIND[k]}</span><span class="ls" aria-hidden="true">${SHORT[k]}</span></span> <span class="sp">${inr(P.ready[k])}</span></button>`).join('');
+      const url = esc(C.productUrl('design', p.id));
+      return `<li class="card" id="d${p.id}" data-id="${p.id}" tabindex="-1">`
+        + `<div class="media"><a href="${url}" tabindex="-1" aria-hidden="true"><img ${designSrc(p.id)} sizes="(min-width: 1024px) 270px, (min-width: 700px) 31vw, 46vw" width="400" height="400" loading="lazy" decoding="async" alt="${esc(p.alt)}"></a>`
+        + `<span class="mtag m-sold" hidden>Sold</span><span class="mtag m-bag" hidden>In your bag</span><span class="pictured" hidden></span></div>`
+        + `<div class="body"><div class="trow"><h3><a class="plink" href="${url}">${name}</a></h3><p class="price"></p></div>`
+        + `<div class="seg" role="radiogroup" aria-label="Choose the piece for ${name}">${segs}</div>`
+        + `<button type="button" class="btn sm add"><span class="at">Add to bag</span><span class="vh">: ${name}</span></button></div></li>`;
+    }).join('');
+  
+    ORDER.forEach(id => {
+      const li = document.getElementById('d' + id);
+      cards[id] = {li, segs:$$('.sg', li), price:$('.price', li), pictured:$('.pictured', li),
+        tSold:$('.m-sold', li), tBag:$('.m-bag', li), add:$('.add', li), addTxt:$('.add .at', li)};
+      chosen[id] = C.byId(id).type;
+    });
+  
+    /* card state: in bag / sold / piece choice */
+    function update(id, tick){
+      const c = cards[id], p = C.byId(id);
+      const inBag = C.cart.hasDesign(id), allSold = C.stock.allSold(id);
+      let kind = inBag ? (C.cart.designKind(id) || chosen[id]) : chosen[id];
+      if (!inBag && C.stock.isSold(id, kind)){
+        const free = [p.type].concat(KINDS).find(k => !C.stock.isSold(id, k));
+        if (free) kind = free;
+      }
+      chosen[id] = kind;
+      c.segs.forEach(b => {
+        const k = b.dataset.kind, sold = C.stock.isSold(id, k), on = k === kind;
+        b.setAttribute('aria-checked', on ? 'true' : 'false');
+        b.tabIndex = on ? 0 : -1;
+        if (inBag || sold) b.setAttribute('aria-disabled', 'true'); else b.removeAttribute('aria-disabled');
+        b.classList.toggle('is-sold', sold);
+        b.querySelector('.sp').textContent = sold ? 'Sold' : inr(P.ready[k]);
+      });
+      const price = inr(P.ready[kind]);
+      if (c.price.textContent !== price){
+        c.price.textContent = price;
+        if (tick && !reduce.matches) replay(c.price, 'tick');
+      }
+      c.pictured.textContent = 'Pictured as ' + lower(p.type);
+      c.pictured.hidden = kind === p.type;
+      const soldOut = allSold && !inBag;
+      c.tBag.hidden = !inBag;
+      c.tSold.hidden = !soldOut;
+      c.li.classList.toggle('is-sold', soldOut);
+      c.addTxt.textContent = inBag ? 'In your bag' : soldOut ? 'Sold' : 'Add to bag';
+      c.add.classList.toggle('in-bag', inBag);
+      c.add.classList.toggle('sold', soldOut);
+      if (inBag || soldOut) c.add.setAttribute('aria-disabled', 'true'); else c.add.removeAttribute('aria-disabled');
+    }
+  
+    function pick(id, kind){
+      const p = C.byId(id);
+      if (C.cart.hasDesign(id)){ C.say(`${p.name} is in your bag as a ${lower(C.cart.designKind(id) || kind)}. Each design is one of one.`, true); return false; }
+      if (C.stock.isSold(id, kind)){ C.say(`${p.name} ${lower(kind)} has sold.`, true); return false; }
+      if (chosen[id] !== kind){ chosen[id] = kind; update(id, true); }
+      return true;
+    }
+  
+    grid.addEventListener('click', e => {
+      const li = e.target.closest('.card'); if (!li) return;
+      const id = +li.dataset.id;
+      const sg = e.target.closest('.sg');
+      if (sg){ pick(id, sg.dataset.kind); return; }
+      if (e.target.closest('.add')){
+        const r = C.cart.addDesign(id, chosen[id]);   /* never adds sold pieces or a second copy */
+        if (r.msg) C.say(r.msg, true);
+      }
+    });
+  
+    /* radiogroup keys: arrows move and select, skipping sold pieces */
+    grid.addEventListener('keydown', e => {
+      const sg = e.target.closest('.sg'); if (!sg) return;
+      const dir = {ArrowRight:1, ArrowDown:1, ArrowLeft:-1, ArrowUp:-1}[e.key];
+      if (!dir && e.key !== 'Home' && e.key !== 'End') return;
+      e.preventDefault();
+      const id = +sg.closest('.card').dataset.id, list = cards[id].segs;
+      const usable = list.filter(b => b.getAttribute('aria-disabled') !== 'true');
+      if (!usable.length) return;
+      let next = null;
+      if (e.key === 'Home') next = usable[0];
+      else if (e.key === 'End') next = usable[usable.length - 1];
+      else {
+        let i = list.indexOf(sg);
+        for (let n = 0; n < list.length; n++){ i = (i + dir + list.length) % list.length; if (usable.indexOf(list[i]) > -1){ next = list[i]; break; } }
+      }
+      if (next && pick(id, next.dataset.kind)) next.focus();
+    });
+  
+    /* filters: pill row (phone), the grid's own pills and footer links all share one state */
+    function render(){
+      let n = 0;
+      ORDER.forEach(id => {
+        const show = state.filter === 'all' ? (state.expanded || FEAT.indexOf(id) > -1) : C.byId(id).type === state.filter;
+        cards[id].li.hidden = !show;
+        if (show) n++;
+      });
+      moreWrap.hidden = state.filter !== 'all' || state.expanded || ORDER.length <= FEAT.length;
+      $$('button[data-filter]').forEach(b => b.setAttribute('aria-pressed', b.dataset.filter === state.filter ? 'true' : 'false'));
+      return n;
+    }
+    function setFilter(f, scroll){
+      state.filter = f;
+      const n = render();
+      status.textContent = f !== 'all' ? `Showing ${n} ${C.PLURAL[f].toLowerCase()}`
+        : state.expanded ? `Showing all ${n} designs` : `Showing ${n} of ${ORDER.length} designs`;
+      if (scroll) $('#filters').scrollIntoView({behavior:behaviour(), block:'start'});
+    }
+    document.addEventListener('click', e => {
+      const b = e.target.closest('button[data-filter]');
+      if (b){
+        const f = b.dataset.filter, jump = b.hasAttribute('data-jump');
+        setFilter(jump && state.filter === f ? 'all' : f, jump);
+        return;
+      }
+      const a = e.target.closest('a[data-filter-link]');
+      if (a) setFilter(a.dataset.filterLink, false);
+    });
+    moreBtn.addEventListener('click', () => {
+      state.expanded = true;
+      const n = render();
+      status.textContent = `Showing all ${n} designs`;
+      const first = cards[ORDER[FEAT.length]];
+      if (first) first.li.focus();
+    });
+
+    /* jump to a design's card (used by the one-of-one story slide) */
+    function jumpTo(id){
+      const c = cards[id]; if (!c) return;
+      if (c.li.hidden && state.filter !== 'all') setFilter('all', false);
+      if (c.li.hidden){ state.expanded = true; render(); }
+      c.li.scrollIntoView({behavior:behaviour(), block:'center'});
+      c.li.focus({preventScroll:true});
+      c.li.classList.add('flash');
+      clearTimeout(c.flashT);
+      c.flashT = setTimeout(() => c.li.classList.remove('flash'), 1600);
+    }
+
+    /* ---------- 4. keychains ---------- */
+    const krow = $('#krow'), kcards = {};
+    krow.innerHTML = C.KEYCHAINS.map(k => {
+      const name = esc(k.name), s = C.keyImg(k.slug, true), l = C.keyImg(k.slug), url = esc(C.productUrl('keychain', k.slug));
+      return `<li class="card kcard" data-slug="${esc(k.slug)}">`
+        + `<div class="media"><a href="${url}" tabindex="-1" aria-hidden="true"><img src="${s}" srcset="${s} 300w, ${l} 600w" sizes="(min-width: 1200px) 220px, (min-width: 900px) 18vw, min(60vw, 232px)" width="300" height="300" loading="lazy" decoding="async" alt="${esc(k.alt)}"></a></div>`
+        + `<div class="body"><h3><a class="plink" href="${url}">${name}</a></h3><p class="kmeta">${C.plural(k.charms, 'charm')} · <b>${inr(k.price)}</b></p>`
+        + `<div class="kbuy"><button type="button" class="btn sm add k-add">Add to bag<span class="vh">: ${name} keychain</span></button>`
+        + `<div class="kstep" role="group" aria-label="${name} keychains in your bag" hidden>`
+        + `<button type="button" class="kbtn" data-step="-1">−</button>`
+        + `<span class="kcount"><b>1</b>in bag</span>`
+        + `<button type="button" class="kbtn" data-step="1" aria-label="One more ${name}">+</button>`
+        + `</div></div></div></li>`;
+    }).join('');
+    C.KEYCHAINS.forEach(k => {
+      const li = krow.querySelector(`[data-slug="${CSS.escape(k.slug)}"]`);
+      kcards[k.slug] = {k, add:$('.k-add', li), step:$('.kstep', li), n:$('.kcount b', li), minus:$('.kbtn[data-step="-1"]', li), plus:$('.kbtn[data-step="1"]', li)};
+    });
+    function updateKey(slug){
+      const c = kcards[slug], q = C.cart.keyQty(slug);
+      c.add.hidden = q > 0;
+      c.step.hidden = q === 0;
+      c.n.textContent = String(q);
+      c.minus.setAttribute('aria-label', q <= 1 ? `Remove ${c.k.name} from your bag` : `One less ${c.k.name}`);
+      if (q >= 10) c.plus.setAttribute('aria-disabled', 'true'); else c.plus.removeAttribute('aria-disabled');
+    }
+    krow.addEventListener('click', e => {
+      const li = e.target.closest('.kcard'); if (!li) return;
+      const slug = li.dataset.slug, c = kcards[slug];
+      if (e.target.closest('.k-add')){
+        const r = C.cart.addKeychain(slug);
+        if (r.msg) C.say(r.msg, true);
+        if (r.ok) c.plus.focus();
+        return;
+      }
+      const st = e.target.closest('.kbtn'); if (!st) return;
+      const r = C.cart.stepKeychain(slug, +st.dataset.step);
+      if (r.msg) C.say(r.msg, !r.ok);
+      if (C.cart.keyQty(slug) === 0) c.add.focus();
+    });
+
+    const updateDesigns = () => ORDER.forEach(id => update(id));
+    const refreshAll = () => { updateDesigns(); C.KEYCHAINS.forEach(k => updateKey(k.slug)); };
+    refreshAll();
+    render();
+    return {jumpTo, refreshAll, updateDesigns};
+  })();
+
+  /* ---------- charms (Studio drawings, highlight, grid tile) from charms.json ---------- */
+  function chainArt(el, list){
+    if (!list.length) return;
+    const P0 = [10, 24], P1 = [150, 150], P2 = [290, 24];
+    const pt = t => [0, 1].map(j => (1 - t) * (1 - t) * P0[j] + 2 * (1 - t) * t * P1[j] + t * t * P2[j]);
+    const pts = list.map((_, k) => pt(list.length === 1 ? 0.5 : 0.1 + k * (0.8 / (list.length - 1))));
+    const d = `M${P0} Q${P1} ${P2}`, tilt = [-7, 4, -3, 6, -5, 3, -4];
+    el.innerHTML = `<svg viewBox="0 0 300 170" aria-hidden="true" focusable="false"><path class="ca-gold" d="${d}"/><path class="ca-link" d="${d}"/>`
+      + `<circle class="ca-end" cx="${P0[0]}" cy="${P0[1]}" r="5"/><circle class="ca-end" cx="${P2[0]}" cy="${P2[1]}" r="5"/>`
+      + pts.map(p => `<circle class="ca-ring" cx="${p[0].toFixed(1)}" cy="${(p[1] + 3).toFixed(1)}" r="4"/>`).join('') + '</svg>'
+      + list.map((c, k) => `<img class="ca-charm" src="${esc(C.ROOT + c.img)}" width="96" height="96" alt="" decoding="async" draggable="false" style="left:${(pts[k][0] / 3).toFixed(2)}%;top:${((pts[k][1] + 6) / 1.7).toFixed(2)}%;--r:${tilt[k % tilt.length]}deg">`).join('');
+    el.setAttribute('role', 'img');
+    el.setAttribute('aria-label', `A gold chain with ${list.length} charms: ${listJoin(list.map(c => String(c.name).toLowerCase()))}`);
+  }
+  /* every charm shown on the page is read from charms.json at runtime (no hard-coded ids).
+     Picks go round the categories so each drawing mixes them, and no charm repeats across the page. */
+  function useCharms(list){
+    list = list.filter(c => c && typeof c.id === 'string' && typeof c.img === 'string');
+    if (!list.length) return noCharms();
+    const cats = [], byCat = {}, used = new Set();
+    list.forEach(c => { const k = c.cat || ''; if (!byCat[k]){ byCat[k] = []; cats.push(k); } byCat[k].push(c); });
+    let turn = 0;
+    function pick(n){
+      const out = [];
+      for (let guard = 0; out.length < n && guard < list.length * cats.length; guard++){
+        const c = byCat[cats[turn++ % cats.length]].find(x => !used.has(x.id));
+        if (c){ used.add(c.id); out.push(c); }
+        if (used.size >= list.length) used.clear();
+      }
+      return out;
+    }
+    $$('[data-charms]').forEach(el => chainArt(el, pick(+el.dataset.charms || 5)));
+    $$('[data-charm-imgs]').forEach(el => {
+      el.innerHTML = pick(+el.dataset.charmImgs || 3).map(c => `<img src="${esc(C.ROOT + c.img)}" width="96" height="96" alt="" loading="lazy" decoding="async">`).join('');
+    });
+    $$('[data-charm-count]').forEach(el => { el.textContent = list.length; });
+  }
+  /* offline or missing list: drop the drawings rather than show empty frames */
+  function noCharms(){
+    $$('[data-charms], [data-charm-imgs]').forEach(el => { el.hidden = true; });
+  }
+  fetch(C.ROOT + 'assets/charms/charms.json')
+    .then(r => { if (!r.ok) throw new Error('charms ' + r.status); return r.json(); })
+    .then(list => (Array.isArray(list) ? useCharms(list) : noCharms()))
+    .catch(noCharms);
+
+  /* ---------- stories ---------- */
+  const stories = (function(){
+    const root = $('#stories');
+    const stage = $('.stage', root), wrap = $('.st-slides', root);
+    const slides = $$('.slide', root), bars = $$('.bar', root), N = slides.length;
+    const tag = $('.st-tag', root), pauseBtn = $('.st-pause', root);
+    const reasons = new Set();
+    let i = 0, press = null;
+    const posOf = k => { const d = (k - i + N) % N; return d === 0 ? 'on' : d === 1 ? 'next' : d === N - 1 ? 'prev' : null; };
+    function place(dir){
+      slides.forEach((s, k) => {
+        const now = posOf(k), was = s.dataset.pos;
+        if (now && (was === 'out-l' || was === 'out-r')){
+          /* coming in from off-stage: start on the side it enters from */
+          s.style.transition = 'none';
+          s.dataset.pos = dir > 0 ? 'out-r' : 'out-l';
+          void s.offsetWidth;
+          s.style.transition = '';
+        }
+        s.dataset.pos = now || (dir > 0 ? 'out-l' : 'out-r');
+        const on = k === i;
+        s.setAttribute('aria-hidden', on ? 'false' : 'true');
+        $$('a, button', s).forEach(el => { el.tabIndex = on ? 0 : -1; });
+      });
+    }
+    function restartBar(){
+      bars.forEach((b, k) => { b.classList.remove('on'); b.classList.toggle('done', k < i); });
+      void bars[i].offsetWidth;
+      bars[i].classList.add('on');
+    }
+    function go(to, dir, user){
+      i = (to + N) % N;
+      place(dir);
+      restartBar();
+      tag.textContent = slides[i].dataset.tag;
+      wrap.setAttribute('aria-live', user ? 'polite' : 'off');
+    }
+    function sync(){
+      root.classList.toggle('is-paused', reasons.size > 0);
+      const userPaused = reasons.has('user');
+      pauseBtn.classList.toggle('is-play', userPaused);
+      pauseBtn.setAttribute('aria-label', userPaused ? 'Play stories' : 'Pause stories');
+    }
+    function hold(r, on){
+      if (on === reasons.has(r)) return;
+      if (on) reasons.add(r); else reasons.delete(r);
+      sync();
+    }
+    pauseBtn.addEventListener('click', () => {
+      if (reasons.has('user')){ reasons.delete('user'); reasons.delete('focus'); } else reasons.add('user');
+      sync();
+    });
+    $('.st-arrow.prev', root).addEventListener('click', () => go(i - 1, -1, true));
+    $('.st-arrow.next', root).addEventListener('click', () => go(i + 1, 1, true));
+    root.addEventListener('animationend', e => {
+      if (e.animationName === 'st-fill' && bars[i].contains(e.target)) go(i + 1, 1, false);
+    });
+
+    /* tap the left or right third to step; press and hold to pause; tap a side preview (desktop) to jump */
+    const inside = (el, x, y) => { const r = el.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; };
+    stage.addEventListener('pointerdown', e => {
+      if (e.button !== 0 || e.target.closest('a, button')) return;
+      press = {x:e.clientX, y:e.clientY, t:performance.now(), id:e.pointerId};
+      hold('press', true);
+    });
+    function endPress(e, cancel){
+      if (!press || e.pointerId !== press.id) return;
+      const p = press;
+      press = null;
+      hold('press', false);
+      if (cancel || performance.now() - p.t > 350 || Math.hypot(e.clientX - p.x, e.clientY - p.y) > 12) return;
+      const x = e.clientX, y = e.clientY, card = slides[i];
+      if (inside(card, x, y)){
+        const r = card.getBoundingClientRect(), f = (x - r.left) / r.width;
+        if (f < 1 / 3) go(i - 1, -1, true); else if (f > 2 / 3) go(i + 1, 1, true);
+        return;
+      }
+      const prev = slides.find(s => s.dataset.pos === 'prev'), next = slides.find(s => s.dataset.pos === 'next');
+      const shown = s => s && getComputedStyle(s).visibility === 'visible';
+      if (shown(prev) && inside(prev, x, y)) go(i - 1, -1, true);
+      else if (shown(next) && inside(next, x, y)) go(i + 1, 1, true);
+    }
+    stage.addEventListener('pointerup', e => endPress(e, false));
+    stage.addEventListener('pointercancel', e => endPress(e, true));
+    stage.addEventListener('pointerleave', e => { endPress(e, true); hold('hover', false); });
+    stage.addEventListener('pointermove', e => { if (e.pointerType === 'mouse') hold('hover', inside(slides[i], e.clientX, e.clientY)); });
+    stage.addEventListener('contextmenu', e => { if (!e.target.closest('a, button')) e.preventDefault(); });
+
+    /* keyboard focus entering the carousel pauses it until Play is pressed */
+    root.addEventListener('focusin', e => {
+      let kb = true;
+      try { kb = e.target.matches(':focus-visible'); } catch(err){}
+      if (kb && !root.contains(e.relatedTarget)) hold('focus', true);
+    });
+    root.addEventListener('focusout', e => { if (!root.contains(e.relatedTarget)) hold('focus', false); });
+    /* pause off-screen, in a background tab, and while the bag is open */
+    if ('IntersectionObserver' in window){
+      new IntersectionObserver(es => es.forEach(en => hold('away', !en.isIntersecting)), {threshold: 0.3}).observe(stage);
+    }
+    document.addEventListener('visibilitychange', () => hold('hidden', document.hidden));
+    new MutationObserver(() => hold('bag', html.classList.contains('bag-open'))).observe(html, {attributes: true, attributeFilter: ['class']});
+
+    root.classList.add('is-init');
+    go(0, 1, false);
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('is-init')));
+    return {hold};
+  })();
+
+  /* ---------- care: links to an answer open it ---------- */
+  function openCare(hash){
+    if (!hash || hash.length < 2) return;
+    const d = document.getElementById(decodeURIComponent(hash.slice(1)));
+    if (d && d.tagName === 'DETAILS') d.open = true;
+  }
+  document.addEventListener('click', e => { const a = e.target.closest('a[href^="#care-"]'); if (a) openCare(a.getAttribute('href')); });
+  window.addEventListener('hashchange', () => openCare(location.hash));
+  openCare(location.hash);
+
+  /* ---------- bottom tab bar: show where she is ---------- */
+  const tabFor = {stories:'home', highlights:'home', shop:'shop', drop:'shop', keychains:'shop', studio:'studio'};
+  const tbs = $$('.tb[data-tab]');
+  const setTab = t => tbs.forEach(a => a.classList.toggle('is-on', a.dataset.tab === t));
+  setTab('home');
+  if ('IntersectionObserver' in window){
+    const spy = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) setTab(tabFor[en.target.id] || ''); }), {rootMargin: '-50% 0px -49% 0px'});
+    ['stories', 'drop', 'highlights', 'shop', 'keychains', 'studio', 'care', 'footer'].forEach(id => { const el = document.getElementById(id); if (el) spy.observe(el); });
+  }
+
+  /* ---------- the one-of-one story slide (Wonderland since 6 Nov 2026): jump to its card, or to the grid once it has sold ---------- */
+  const cherryBtn = $('#cherryBtn'), CHERRY = +cherryBtn.dataset.qv;
+  cherryBtn.addEventListener('click', () => {
+    if (C.stock.allSold(CHERRY)) $('#shop').scrollIntoView({behavior: behavior(), block: 'start'});
+    else shop.jumpTo(CHERRY);
+  });
+  function syncCherry(){ cherryBtn.firstChild.textContent = C.stock.allSold(CHERRY) ? 'Shop designs ' : 'See ' + C.byId(CHERRY).name + ' '; }
+
+  /* ---------- bag ---------- */
+  C.bag.mount({openers: '[data-bag-open]'});
+  const counters = $$('[data-bag-count]');
+  let lastCount = C.cart.count();
+  function syncBadges(){ const n = C.cart.count(); counters.forEach(el => { el.dataset.n = n; }); }
+  C.cart.onChange(list => {
+    shop.refreshAll(); syncBadges();
+    const n = C.cart.count(list);
+    if (n > lastCount && !RM.matches) counters.forEach(el => { el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); });
+    lastCount = n;
+  });
+  C.stock.onChange(() => { shop.updateDesigns(); syncCherry(); });
+  syncBadges();
+  syncCherry();
+})();
+</script>
+<script src="checkout.js?v=20261106" defer></script>
+<script src="js/welcome.js?v=20261106" defer></script>
+</body>
+</html>
