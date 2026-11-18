@@ -181,6 +181,7 @@ body.waist-first .prog li[data-p="3"]{order:-1}
 .step-head .st-sum{margin-left:auto;font:600 .85rem var(--font-body);color:var(--muted);text-align:right}
 .step-head .st-edit{font:700 .8rem var(--font-body);text-decoration:underline;text-underline-offset:3px;flex:none}
 .step-head[aria-expanded="true"] .st-sum,.step-head[aria-expanded="true"] .st-edit{display:none}
+.step-head[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
 .step-head::after{content:"";width:10px;height:10px;border-right:2.5px solid var(--ink);border-bottom:2.5px solid var(--ink);transform:rotate(45deg);margin-left:4px;flex:none;margin-bottom:4px}
 .step-head[aria-expanded="true"]::after{transform:rotate(-135deg);margin-bottom:-4px;margin-left:auto}
 .step-body{padding:0 18px 18px}
@@ -587,6 +588,8 @@ const maxFor = p => p === 'waist' ? WAIST_MAX : MAX;
 const maxNow = () => maxFor(S.piece);
 /* 18 Nov 2026: all 10 waist chain charms are included in its price; other pieces include PRICING.includedCharms */
 const includedFor = p => p === 'waist' ? WAIST_MAX : INCLUDED;
+/* 18 Nov 2026: the waist chain is not made on the fine curb chain */
+const chainAllowed = (piece, chain) => !(piece === 'waist' && chain === 'g3');
 const incNow = () => includedFor(S.piece);
 const KIND = {bracelet:'Bracelet', anklet:'Anklet', necklace:'Necklace', keychain:'Keychain'};
 
@@ -611,9 +614,11 @@ const reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 function sanitize(d){
   d = d || {};
   const piece = Object.hasOwn(PIECES, d.piece) ? d.piece : 'bracelet';
+  let chain = Object.hasOwn(CHAINS, d.chain) ? d.chain : 'g1';
+  if (!chainAllowed(piece, chain)) chain = 'g1';
   return {
     piece,
-    chain: Object.hasOwn(CHAINS, d.chain) ? d.chain : 'g1',
+    chain,
     charms: (Array.isArray(d.charms) ? d.charms : []).filter(id => typeof id === 'string' && Object.hasOwn(BY, id)).slice(0, maxFor(piece))
   };
 }
@@ -631,6 +636,9 @@ function parseHash(){
 const fromHash = parseHash();
 const storedDesign = store.get('charmie-design', null);
 let S = fromHash || sanitize(storedDesign);
+/* 18 Nov 2026: a waist chain link without a chain in it starts with no chain chosen; charms unlock once she picks one */
+let chainPicked = !(fromHash && S.piece === 'waist' && !/(^|[#&])c=/.test(location.hash));
+const chainGate = () => S.piece === 'waist' && !chainPicked;
 let sel = null, tabSlot = 0, fresh = -1, q = '', cat = 'All';
 let past = [], future = [];
 /* 18 Nov 2026: a waist chain link opens on the chain step; other deep links open on charms */
@@ -865,7 +873,12 @@ function renderSteps(){
   $('#sum2').textContent = Ch.name;
   $('#sum3').textContent = n ? plural(n, 'charm') : 'None yet';
   document.querySelectorAll('.pcard').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === S.piece)));
-  document.querySelectorAll('.chcard').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === S.chain)));
+  document.querySelectorAll('.chcard').forEach(b => { b.hidden = !chainAllowed(S.piece, b.dataset.k); b.setAttribute('aria-pressed', String(!chainGate() && b.dataset.k === S.chain)); });
+  /* waist chain: the charms step and its Next button wait for a chain */
+  const gate = chainGate();
+  $('#next2').disabled = gate;
+  $('#h3').setAttribute('aria-disabled', String(gate));
+  if (gate){ $('#sum2').textContent = 'Choose a chain'; openSteps.delete(3); $('#h3').setAttribute('aria-expanded', 'false'); $('#b3').hidden = true; const li3 = document.querySelector('#prog li[data-p="3"]'); if (li3) li3.classList.remove('on'); $('#stageHint').textContent = 'Choose a chain to begin'; }
   queueCompact();
 }
 function setOpen(k, on){ if (on) openSteps.add(k); else openSteps.delete(k); renderSteps(); }
@@ -882,6 +895,7 @@ function advance(from, to){
 }
 document.querySelectorAll('.step-head').forEach(b => b.addEventListener('click', () => {
   const k = +b.id.slice(1), opening = !openSteps.has(k);
+  if (b.getAttribute('aria-disabled') === 'true'){ say('Choose a chain first.', true); revealStep(2); return; }
   setOpen(k, opening);
   if (opening) revealStep(k);
 }));
@@ -890,7 +904,9 @@ $('#pieces').addEventListener('click', e => {
   const k = b.dataset.k;
   if (k !== S.piece){
     const over = S.charms.length - maxFor(k);
-    commit(() => { S.piece = k; if (over > 0) S.charms = S.charms.slice(0, maxFor(k)); });
+    const swapChain = !chainAllowed(k, S.chain);
+    commit(() => { S.piece = k; if (over > 0) S.charms = S.charms.slice(0, maxFor(k)); if (swapChain) S.chain = 'g1'; });
+    if (swapChain) say('The waist chain comes on the textured or double-link chain, so it switched to Textured curb.', true);
     sel = null; renderAll();
     if (over > 0) say(PIECES[k].name + ' holds up to ' + maxFor(k) + ' charms, so the last ' + plural(over, 'charm') + ' came off.', true);
     say(PIECES[k].name + ' selected. From ' + inr(PIECES[k].base) + '. ' + summary());
@@ -901,11 +917,14 @@ $('#next2').addEventListener('click', () => advance(2, 3));
 $('#chains').addEventListener('click', e => {
   const b = e.target.closest('.chcard'); if (!b) return;
   const k = b.dataset.k;
+  const wasGated = chainGate();
+  chainPicked = true;
   if (k !== S.chain){
     commit(() => { S.chain = k; });
     renderAll();
     say(CHAINS[k].name + ' chain selected.');
-  }
+  } else if (wasGated) renderAll();
+  if (wasGated) advance(2, 3);
 });
 
 /* ---------- chosen chips, meter, rail ---------- */

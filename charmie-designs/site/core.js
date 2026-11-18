@@ -93,7 +93,7 @@
     {slug:'golden-hour',name:'Golden hour',chain:'g1',charms:['CH-223','CH-229','CH-222','CH-208','CH-212'],names:'hot air balloon, coconut drink, pastel rainbow, a plane and a globe',line:'Sunsets and somewhere far away.'},
     {slug:'guardian',name:'Guardian',chain:'g2',charms:['CH-182','CH-231','CH-181','CH-231','CH-182'],names:'rhinestone evil eyes, evil eye halos and a hamsa',line:'Evil eyes and a hamsa, kept close.'},
     {slug:'fruit-punch',name:'Fruit punch',chain:'g1',charms:['CH-131','CH-130','CH-121','CH-120','CH-125'],names:'cherries, watermelon, strawberry, orange slice and a pineapple',line:'Glossy red fruit, poolside.'},
-    {slug:'sugar-rush',name:'Sugar rush',chain:'g3',charms:['CH-241','CH-138','CH-232','CH-128','CH-240'],names:'bubble teas, a princess cupcake, a honey pot and cake',line:'Bubble tea, cake and a cupcake with a crown.'}
+    {slug:'sugar-rush',name:'Sugar rush',chain:'g1',charms:['CH-241','CH-138','CH-232','CH-128','CH-240'],names:'bubble teas, a princess cupcake, a honey pot and cake',line:'Bubble tea, cake and a cupcake with a crown.'}
   ];
   const KIND = {bracelet:'Bracelet', anklet:'Anklet', necklace:'Necklace', keychain:'Keychain'};
   const PLURAL = {bracelet:'Bracelets', anklet:'Anklets', necklace:'Necklaces'};
