@@ -1,0 +1,138 @@
+/* Charmiè checkout: hands the on-device bag ('charmie-cart') to the Hostinger Ecommerce store.
+   Bag items keep their shapes from index.html / studio.html; each one is matched to a store variant by SKU:
+     ready-made design  {type:'design', id:'design-7', kind:'bracelet'}  -> D07-BR / D07-AN / D07-NE
+     keychain           {type:'design', id:'keychain-pup-love', qty}     -> K-pup-love (qty)
+     custom piece       {type:'custom', piece, chain, charms, names}     -> C-<piece>-<chain>, plus C-extra-charm per charm over 5
+   The store's prices and stock are the source of truth.
+   Charm lists: the order keeps a line item's custom field values, not the cart metadata. Each custom
+   piece goes on its own line and fills the product's custom field whose title contains "charm"
+   (add a text field called "Charms" to the 4 Custom products in hPanel). Metadata is still sent too. */
+(function(){
+  const API = 'https://api-ecommerce.hostinger.com/v2';
+  const CHANNEL = 'scha_01M4XH3NWW564PE2S0ZKRZ418H';
+  const KEY = 'charmie-cart';
+  const INCLUDED = 5;
+  const PIECE_CODE = {bracelet:'BR', anklet:'AN', necklace:'NE'};
+  const CHAIN = {g1:'Textured curb', g2:'Double-link', g3:'Fine curb'};
+  /* shown under the Checkout button; js/core.js overrides it when the page loads it */
+  const PAYMENT_NOTE = 'Cash on delivery. Shipping ₹79 on every order.';
+
+  const readBag = () => { try { const c = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(c) ? c : []; } catch(e){ return []; } };
+  /* charm names: saved on the bag item by the Studio; older bags fall back to the Studio's list, then the id */
+  const charmNames = it => {
+    if (Array.isArray(it.names) && it.names.length === it.charms.length) return it.names;
+    const map = window.CHARMIE_CHARMS || {};
+    return it.charms.map(id => map[id] || String(id).replace(/-/g, ' '));
+  };
+
+  /* sku -> {variant, charmField} from one catalogue call (35 products today, 100 max per page) */
+  async function catalogue(){
+    const map = {};
+    for (let offset = 0; offset < 1000; offset += 100){
+      const r = await fetch(API + '/channels/' + CHANNEL + '/products?limit=100&offset=' + offset);
+      if (!r.ok) throw new Error('catalogue ' + r.status);
+      const d = await r.json(), list = d.data || [];
+      list.forEach(p => {
+        const field = (p.custom_fields || []).find(f => /charm/i.test(f.title || ''));
+        (p.variants || []).forEach(v => { if (v.sku) map[v.sku] = {variant:v, charmField: field ? field.id : null}; });
+      });
+      if (list.length < 100) break;
+    }
+    return map;
+  }
+
+  /* bag -> checkout items + notes; throws a customer-facing message when something can't be bought */
+  function toItems(bag, bySku){
+    const items = [], notes = {};
+    let extra = 0, n = 0;
+    const find = (sku, label) => {
+      const e = bySku[sku];
+      if (!e) throw new Error(label + ' is not available to order online right now. Please remove it and try again.');
+      if (e.variant.is_available === false) throw new Error(label + ' has just sold. Please remove it from your bag.');
+      return e;
+    };
+    const add = (sku, qty, label) => {
+      const e = find(sku, label), same = items.find(i => i.variant_id === e.variant.id && !i.custom_field_values);
+      if (same) same.quantity += qty; else items.push({variant_id: e.variant.id, quantity: qty});
+    };
+    bag.forEach(it => {
+      if (!it || typeof it !== 'object') return;
+      if (it.type === 'design' && typeof it.id === 'string'){
+        if (it.id.indexOf('keychain-') === 0){
+          add('K-' + it.id.slice(9), Math.min(10, Math.max(1, Math.floor(Number(it.qty)) || 1)), it.name || 'A keychain');
+        } else if (it.id.indexOf('design-') === 0 && PIECE_CODE[it.kind]){
+          const num = String(parseInt(it.id.slice(7), 10)).padStart(2, '0');
+          add('D' + num + '-' + PIECE_CODE[it.kind], 1, (it.name || 'A design') + ' ' + it.kind);
+        }
+        return;
+      }
+      if ((it.type === undefined || it.type === 'custom') && it.piece && CHAIN[it.chain] && Array.isArray(it.charms)){
+        n++;
+        const e = find('C-' + it.piece + '-' + it.chain, 'A custom ' + it.piece);
+        const names = charmNames(it);
+        const text = it.charms.length + ' charms, in order: ' + names.map((nm, i) => (i + 1) + '. ' + nm).join(', ') + ' [codes: ' + it.charms.join(',') + ']';
+        const line = {variant_id: e.variant.id, quantity: 1};
+        if (e.charmField) line.custom_field_values = [{custom_field_id: e.charmField, value: text}];
+        items.push(line);
+        extra += Math.max(0, it.charms.length - INCLUDED);
+        notes['custom_' + n] = 'Custom ' + it.piece + ', ' + CHAIN[it.chain] + ' chain, ' + text;
+      }
+    });
+    if (extra) add('C-extra-charm', extra, 'Extra charms');
+    if (!items.length) throw new Error('Your bag is empty.');
+    return {items, notes};
+  }
+
+  async function checkout(btn, msg){
+    if (btn.getAttribute('aria-disabled') === 'true') return;
+    btn.setAttribute('aria-disabled', 'true');
+    const label = btn.textContent;
+    btn.textContent = 'Opening checkout…';
+    msg.textContent = '';
+    try {
+      const {items, notes} = toItems(readBag(), await catalogue());
+      const base = location.origin + location.pathname;
+      const r = await fetch(API + '/channels/' + CHANNEL + '/checkout', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({items, metadata: notes, locale: 'en', time_zone: 'Asia/Kolkata',
+          success_url: base + '?order=done', cancel_url: base + '?order=cancelled'})
+      });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok || !d.url) throw new Error('We couldn’t open checkout just now. Please try again in a minute.');
+      location.href = d.url;
+    } catch(e){
+      msg.textContent = (e && e.message && !/^catalogue|Failed to fetch|NetworkError/.test(e.message)) ? e.message : 'We couldn’t reach checkout. Check your connection and try again.';
+      btn.textContent = label;
+      btn.removeAttribute('aria-disabled');
+    }
+  }
+
+  function init(){
+    const panel = document.getElementById('bagPanel');
+    if (!panel) return;
+    const old = panel.querySelector('.fine');
+    const C = window.Charmie;
+    const wrap = document.createElement('div');
+    wrap.className = 'bp-checkout';
+    wrap.innerHTML = '<button type="button" class="btn" id="checkoutBtn">Checkout</button>'
+      + '<p class="fine" id="checkoutMsg" role="status" aria-live="polite"></p>'
+      + '<p class="fine"></p>';
+    wrap.lastChild.textContent = C ? C.paymentNote() + ' ' + C.shippingNote() : PAYMENT_NOTE;
+    if (old) old.replaceWith(wrap); else panel.appendChild(wrap);
+    const btn = wrap.querySelector('#checkoutBtn'), msg = wrap.querySelector('#checkoutMsg');
+    btn.addEventListener('click', () => checkout(btn, msg));
+
+    const q = new URLSearchParams(location.search).get('order');
+    if (q === 'done' || q === 'cancelled'){
+      const bar = document.createElement('div');
+      bar.className = 'order-note';
+      bar.setAttribute('role', 'status');
+      bar.textContent = q === 'done'
+        ? 'Thank you! Your order is placed. We’ll email you the details and let you know when it ships.'
+        : 'Checkout was cancelled. Your bag is still here whenever you’re ready.';
+      document.body.prepend(bar);
+      history.replaceState(null, '', location.pathname + location.hash);
+    }
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
